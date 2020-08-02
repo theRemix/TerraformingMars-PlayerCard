@@ -1,13 +1,16 @@
 <script>
 import { onDestroy } from 'svelte'
-import { TitaniumS, TitaniumP } from './stores'
+import {
+  TitaniumS, TitaniumP,
+  spendCredits, creditRegister, queueSpend
+} from './stores'
 
-const dec5 = () => TitaniumS.update(n => n - 5)
-const dec1 = () => TitaniumS.update(n => n - 1)
-const inc1 = () => TitaniumS.update(n => n + 1)
-const inc5 = () => TitaniumS.update(n => n + 5)
-const decP = () => TitaniumP.update(n => n - 1)
-const incP = () => TitaniumP.update(n => n + 1)
+const dec5 = () => queueSpend($spendCredits, creditRegister, $creditRegister, 'TitaniumS', TitaniumS, $TitaniumS, (n => n - 5))
+const dec1 = () => queueSpend($spendCredits, creditRegister, $creditRegister, 'TitaniumS', TitaniumS, $TitaniumS, (n => n - 1))
+const inc1 = () => queueSpend($spendCredits, creditRegister, $creditRegister, 'TitaniumS', TitaniumS, $TitaniumS, (n => n + 1))
+const inc5 = () => queueSpend($spendCredits, creditRegister, $creditRegister, 'TitaniumS', TitaniumS, $TitaniumS, (n => n + 5))
+const decP = () => queueSpend($spendCredits, creditRegister, $creditRegister, 'TitaniumP', TitaniumP, $TitaniumP, (n => n - 1))
+const incP = () => queueSpend($spendCredits, creditRegister, $creditRegister, 'TitaniumP', TitaniumP, $TitaniumP, (n => n + 1))
 </script>
 
 <main>

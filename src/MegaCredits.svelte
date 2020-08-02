@@ -1,13 +1,16 @@
 <script>
 import { onDestroy } from 'svelte'
-import { MCreditS, MCreditP } from './stores'
+import {
+  MCreditS, MCreditP,
+  spendCredits, creditRegister, queueSpend
+} from './stores'
 
-const dec5 = () => MCreditS.update(n => n - 5)
-const dec1 = () => MCreditS.update(n => n - 1)
-const inc1 = () => MCreditS.update(n => n + 1)
-const inc5 = () => MCreditS.update(n => n + 5)
-const decP = () => MCreditP.update(n => n - 1)
-const incP = () => MCreditP.update(n => n + 1)
+const dec5 = () => queueSpend($spendCredits, creditRegister, $creditRegister, 'MCreditS', MCreditS, $MCreditS, (n => n - 5))
+const dec1 = () => queueSpend($spendCredits, creditRegister, $creditRegister, 'MCreditS', MCreditS, $MCreditS, (n => n - 1))
+const inc1 = () => queueSpend($spendCredits, creditRegister, $creditRegister, 'MCreditS', MCreditS, $MCreditS, (n => n + 1))
+const inc5 = () => queueSpend($spendCredits, creditRegister, $creditRegister, 'MCreditS', MCreditS, $MCreditS, (n => n + 5))
+const decP = () => queueSpend($spendCredits, creditRegister, $creditRegister, 'MCreditP', MCreditP, $MCreditP, (n => n - 1))
+const incP = () => queueSpend($spendCredits, creditRegister, $creditRegister, 'MCreditP', MCreditP, $MCreditP, (n => n + 1))
 </script>
 
 <main>

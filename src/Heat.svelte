@@ -1,12 +1,15 @@
 <script>
 import { onDestroy } from 'svelte'
-import { HeatS, HeatP } from './stores'
+import {
+  HeatS, HeatP,
+  spendCredits, creditRegister, queueSpend
+} from './stores'
 
-const dec8 = () => HeatS.update(n => n - 8)
-const dec1 = () => HeatS.update(n => n - 1)
-const inc1 = () => HeatS.update(n => n + 1)
-const decP = () => HeatP.update(n => n - 1)
-const incP = () => HeatP.update(n => n + 1)
+const dec8 = () => queueSpend($spendCredits, creditRegister, $creditRegister, 'HeatS', HeatS, $HeatS, (n => n - 8))
+const dec1 = () => queueSpend($spendCredits, creditRegister, $creditRegister, 'HeatS', HeatS, $HeatS, (n => n - 1))
+const inc1 = () => queueSpend($spendCredits, creditRegister, $creditRegister, 'HeatS', HeatS, $HeatS, (n => n + 1))
+const decP = () => queueSpend($spendCredits, creditRegister, $creditRegister, 'HeatP', HeatP, $HeatP, (n => n - 1))
+const incP = () => queueSpend($spendCredits, creditRegister, $creditRegister, 'HeatP', HeatP, $HeatP, (n => n + 1))
 </script>
 
 <main>
