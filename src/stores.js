@@ -1,6 +1,7 @@
 import { writable } from 'svelte/store'
 
 export const TR = writable(20)
+export const Generation = writable(1)
 
 export const MCreditS = writable(0)
 export const MCreditP = writable(1)
