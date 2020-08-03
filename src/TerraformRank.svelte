@@ -39,7 +39,6 @@ const inc5 = () => queueSpend($spendCredits, creditRegister, $creditRegister, 'T
   </div>
 </div>
 
-
-<h2>
+<h2 style="border: 1px solid red;">
   Generation { $Generation }
 </h2>

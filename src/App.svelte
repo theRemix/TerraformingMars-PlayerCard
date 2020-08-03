@@ -50,119 +50,13 @@
               <MegaCredits />
             </div>
             <div class="column medium-4">
-              <div class="grid-area-container grid-area-container-steel">
-                <div class="grid-area-income grid-area-steel">
-                  <div class="grid-area">
-                    <div class="counter">
-                      <div class="counter-label">
-                        <span>Steel Income</span>
-                      </div>
-                      <div class="counter-count">
-                        8
-                      </div>
-                      <div class="counter-change">
-                        +4
-                      </div>
-                    </div>
-                    <div class="counter-buttons">
-                      <div class="counter-buttons-resources counter-buttons-resources-five">
-                        <button class="counter-button-resource plus">+</button>
-                        <button class="counter-button-resource minus">-</button>
-                      </div>
-                      <div class="counter-buttons-resources counter-buttons-resources-one">
-                        <button class="counter-button-resource plus">+</button>
-                        <button class="counter-button-resource minus">-</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="grid-area-resources grid-area-resources grid-area-resources-steel">
-                  <div class="grid-area">
-                    <div class="counter">
-                      <div class="counter-label">
-                        <span>Steel Resources</span>
-                      </div>
-                      <div class="counter-count">
-                        8
-                      </div>
-                      <div class="counter-change">
-                        +4
-                      </div>
-                    </div>
-                    <div class="counter-buttons">
-                      <div class="counter-buttons-resources counter-buttons-resources-five">
-                        <button class="counter-button-resource plus">+</button>
-                        <button class="counter-button-resource minus">-</button>
-                      </div>
-                      <div class="counter-buttons-resources counter-buttons-resources-one">
-                        <button class="counter-button-resource plus">+</button>
-                        <button class="counter-button-resource minus">-</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <Steel />
             </div>
             <div class="column medium-4">
-              <div class="grid-area-container grid-area-container-titanium">
-                <div class="grid-area-income grid-area-titanium">
-                  <div class="grid-area">
-                    <div class="counter">
-                      <div class="counter-label">
-                        <span>Titanium Income</span>
-                      </div>
-                      <div class="counter-count">
-                        8
-                      </div>
-                      <div class="counter-change">
-                        +4
-                      </div>
-                    </div>
-                    <div class="counter-buttons">
-                      <div class="counter-buttons-resources counter-buttons-resources-five">
-                        <button class="counter-button-resource plus">+</button>
-                        <button class="counter-button-resource minus">-</button>
-                      </div>
-                      <div class="counter-buttons-resources counter-buttons-resources-one">
-                        <button class="counter-button-resource plus">+</button>
-                        <button class="counter-button-resource minus">-</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="grid-area-resources grid-area-resources grid-area-resources-titanium">
-                  <div class="grid-area">
-                    <div class="counter">
-                      <div class="counter-label">
-                        <span>Titanium Resources</span>
-                      </div>
-                      <div class="counter-count">
-                        8
-                      </div>
-                      <div class="counter-change">
-                        +4
-                      </div>
-                    </div>
-                    <div class="counter-buttons">
-                      <div class="counter-buttons-resources counter-buttons-resources-five">
-                        <button class="counter-button-resource plus">+</button>
-                        <button class="counter-button-resource minus">-</button>
-                      </div>
-                      <div class="counter-buttons-resources counter-buttons-resources-one">
-                        <button class="counter-button-resource plus">+</button>
-                        <button class="counter-button-resource minus">-</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <Titanium />
             </div>
           </div>
         </div>
-        <Steel />
-        <Titanium />
         <Plants />
         <Energy />
         <Heat />
