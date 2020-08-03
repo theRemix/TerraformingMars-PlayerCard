@@ -20,7 +20,7 @@ export const state = writable({})
 export const resetState = () => state.set(initialState)
 
 // ## SESSIONS ##
-if (Storage) {
+if (Storage && localStorage.getItem('state')) {
   state.set(JSON.parse(localStorage.getItem('state')))
 } else {
   resetState()
