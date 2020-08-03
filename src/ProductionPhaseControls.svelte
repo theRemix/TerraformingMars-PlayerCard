@@ -3,6 +3,8 @@ import { state, creditRegister } from './stores'
 
 const productionPhase = () => {
   state.update(state => ({
+    ...state,
+
     // Increment Generation
     Generation: state.Generation + 1,
 
@@ -18,13 +20,14 @@ const productionPhase = () => {
     PlantS: state.PlantS + state.PlantP,
     EnergyS: state.EnergyS + state.EnergyP,
     HeatS: state.HeatS + state.HeatP,
-
-    ...state
   }))
 }
 
 </script>
-<main>
-  <button on:click={ productionPhase }>Production Phase</button>
-</main>
 
+<div class="grid-area">
+  <button class="button-production" on:click={ productionPhase }>
+    <span class="production-generation">{ $state.Generation }</span>
+    <span class="production-text">Start Production</span>
+  </button>
+</div>

@@ -18,12 +18,10 @@ const commitSpendCredits = () => { // empty creditRegister
 }
 
 </script>
-<main>
-  {#if !$spendCredits}
-    <button on:click={ enableSpendCredits }>Spend Credits</button>
-  {:else}
-    <button on:click={ disableSpendCredits }>Cancel Spend Credits</button>
-    <button on:click={ commitSpendCredits }>Commit Spend Credits</button>
-  {/if}
-</main>
 
+{#if !$spendCredits}
+  <button on:click={ enableSpendCredits }>Spend Credits</button>
+{:else}
+  <button on:click={ disableSpendCredits }>Cancel Spend Credits</button>
+  <button on:click={ commitSpendCredits }>Commit Spend Credits</button>
+{/if}

@@ -9,16 +9,59 @@ const decP = () => queueSpend($spendCredits, $creditRegister, 'HeatP', $state, (
 const incP = () => queueSpend($spendCredits, $creditRegister, 'HeatP', $state, (n => n + 1))
 </script>
 
-<main>
-<h2>
-  <button on:click={ dec8 }>-8</button>
-  <button on:click={ dec1 }>-1</button>
-  Heat 🍱 : { $state.HeatS }
-  <button on:click={ inc1 }>+1</button>
-</h2>
-<h2>
-  <button on:click={ decP }>-1</button>
-  Heat ⚛ : { $state.HeatP }
-  <button on:click={ incP }>+1</button>
-</h2>
-</main>
+<div class="grid-area-container grid-area-container-heat">
+  HEAT
+  <div class="grid-area-income grid-area-heat">
+    <div class="grid-area">
+      <div class="counter">
+        <div class="counter-label">
+          <span>Heat Income</span>
+        </div>
+        <div class="counter-count">
+          { $state.HeatP }
+        </div>
+        <div class="counter-change">
+          +4
+        </div>
+      </div>
+      <div class="counter-buttons">
+        <div class="counter-buttons-resources counter-buttons-resources-one">
+          <button on:click={ incP } class="counter-button-resource plus">+</button>
+          <button on:click={ decP } class="counter-button-resource minus">-</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-area-resources grid-area-resources grid-area-resources-heat">
+    <div class="grid-area">
+      <div class="counter">
+        <div class="counter-label">
+          <span>Heat Resources</span>
+        </div>
+        <div class="counter-count">
+          { $state.HeatS }
+        </div>
+        <div class="counter-change">
+          +4
+        </div>
+      </div>
+      <div class="counter-buttons">
+        <div class="counter-buttons-resources counter-buttons-resources-temperature">
+          <button on:click={ dec8 } class="counter-button-resource temperature">
+            <div class="temperature-icon">
+              1°
+            </div>
+            <div class="temperature-count">
+              -8
+            </div>
+          </button>
+        </div>
+        <div class="counter-buttons-resources counter-buttons-resources-one">
+          <button on:click={ inc1 } class="counter-button-resource plus">+</button>
+          <button on:click={ dec1 } class="counter-button-resource minus">-</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
