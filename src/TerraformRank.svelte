@@ -1,11 +1,42 @@
 <script>
-import { onDestroy } from 'svelte'
+import { fly, fade } from 'svelte/transition'
 import { state, spendCredits, creditRegister, queueSpend } from './stores'
+import { createChangeCounter, updateCounterChange, counterChangeInAnim } from './utils'
 
-const dec5 = () => queueSpend($spendCredits, $creditRegister, 'TR', $state, (n => n - 5))
-const dec1 = () => queueSpend($spendCredits, $creditRegister, 'TR', $state, (n => n - 1))
-const inc1 = () => queueSpend($spendCredits, $creditRegister, 'TR', $state, (n => n + 1))
-const inc5 = () => queueSpend($spendCredits, $creditRegister, 'TR', $state, (n => n + 5))
+let counterChange = createChangeCounter('TR')
+
+const dec5 = () => {
+  queueSpend($spendCredits, $creditRegister, 'TR', $state, (n => n - 5))
+  counterChange = updateCounterChange(
+    counterChange,
+    (n => n - 5),
+    (reset) => counterChange = reset
+  )
+}
+const dec1 = () => {
+  queueSpend($spendCredits, $creditRegister, 'TR', $state, (n => n - 1))
+  counterChange = updateCounterChange(
+    counterChange,
+    (n => n - 1),
+    (reset) => counterChange = reset
+  )
+}
+const inc1 = () => {
+  queueSpend($spendCredits, $creditRegister, 'TR', $state, (n => n + 1))
+  counterChange = updateCounterChange(
+    counterChange,
+    (n => n + 1),
+    (reset) => counterChange = reset
+  )
+}
+const inc5 = () => {
+  queueSpend($spendCredits, $creditRegister, 'TR', $state, (n => n + 5))
+  counterChange = updateCounterChange(
+    counterChange,
+    (n => n + 5),
+    (reset) => counterChange = reset
+  )
+}
 </script>
 
 <div class="grid-area-container grid-area-container-tr">
@@ -18,9 +49,11 @@ const inc5 = () => queueSpend($spendCredits, $creditRegister, 'TR', $state, (n =
         <div class="counter-count">
           { $state.TR }
         </div>
-        <div class="counter-change">
-          +4
+        {#if counterChange.text !== ''}
+        <div class="counter-change" in:fly={counterChangeInAnim} out:fade>
+          { counterChange.text }
         </div>
+        {/if}
       </div>
       <div class="counter-buttons">
         <div class="counter-buttons-resources counter-buttons-resources-five">
