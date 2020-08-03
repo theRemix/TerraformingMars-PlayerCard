@@ -1,13 +1,47 @@
 <script>
-import { creditRegister } from './stores'
-import SpendCreditsControls from './SpendCreditsControls.svelte'
+import { state, spendCredits, creditRegister, creditRegisterTotal } from './stores'
 import ResetControls from './ResetControls.svelte'
+
+// item: {type, amount}
+const itemQuantityFormat = ({ type, amount }) => {
+  const amountStr = amount >= 0 ? '+'+amount : amount
+
+  switch(type){
+    case 'SteelS':
+      return `${amountStr} (${amount * 2} M€)`
+      break
+    case 'TitaniumS':
+      return `${amountStr} (${amount * 3} M€)`
+      break
+    default:
+      return amountStr
+  }
+}
+
+const enableSpendCredits = () => spendCredits.set(true)
+const disableSpendCredits = () => { // undo all transactions in register
+  $creditRegister.forEach(({ type, amount }) =>
+    state.set({
+      ...$state,
+      [type]: $state[type] - amount
+    })
+  )
+  creditRegister.set([])
+  spendCredits.set(false)
+}
+const commitSpendCredits = () => { // empty creditRegister
+  creditRegister.set([])
+  spendCredits.set(false)
+}
 
 </script>
 
 <div style="border:1px solid red;">
 
-<SpendCreditsControls />
+{#if !$spendCredits}
+  <button on:click={ enableSpendCredits }>Spend Credits</button>
+{/if}
+
 <ResetControls />
 
 
@@ -16,7 +50,9 @@ import ResetControls from './ResetControls.svelte'
 <div class="grid-summary-container">
   <div class="grid-summary">
 
-    <button class="clear-all-button" style="border:1px solid red;">Clear All</button>
+  {#if $spendCredits}
+    <button class="clear-all-button" style="border:1px solid red;" on:click={ disableSpendCredits }>Clear All</button>
+  {/if}
 
     <ul class="log grid-table">
       {#each $creditRegister as item}
@@ -28,7 +64,7 @@ import ResetControls from './ResetControls.svelte'
             </div>
           </div>
           <div class="grid-table-quantity">
-            {item.amount >= 0 ? '+'+item.amount : item.amount}
+            {itemQuantityFormat(item)}
           </div>
           <div class="grid-table-mega-credits">
           </div>
@@ -43,13 +79,15 @@ import ResetControls from './ResetControls.svelte'
         </div>
       </div>
       <div class="grid-table-quantity">
-        -4
+        {$creditRegisterTotal}
       </div>
     </div>
 
   </div>
 
   <div class="grid-actions">
-    <button class="submit-button" style="border:1px solid red;">Submit</button>
+  {#if $spendCredits}
+    <button class="submit-button" style="border:1px solid red;" on:click={ commitSpendCredits }>Submit</button>
+  {/if}
   </div>
 </div>

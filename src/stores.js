@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store'
+import { writable, derived } from 'svelte/store'
 
 const initialState = {
   TR: 20,
@@ -31,6 +31,23 @@ export const logs = writable([])
 
 export const spendCredits = writable(false)
 export const creditRegister = writable([]) // [{ type, amount }]
+
+export const creditRegisterTotal = derived(
+  creditRegister,
+  $creditRegister =>
+    $creditRegister.reduce((total, {type, amount}) => {
+      switch(type){
+        case 'SteelS':
+          return total + amount * 2
+          break
+        case 'TitaniumS':
+          return total + amount * 3
+          break
+        default:
+          return total + amount
+      }
+    }, 0)
+)
 
 export const history = writable([]) // [{ committed, state }]
 
