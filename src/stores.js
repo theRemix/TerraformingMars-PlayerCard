@@ -1,33 +1,51 @@
 import { writable } from 'svelte/store'
 
-export const TR = writable(20)
-export const Generation = writable(1)
-
-export const MCreditS = writable(0)
-export const MCreditP = writable(1)
-
-export const SteelS = writable(0)
-export const SteelP = writable(1)
-
-export const TitaniumS = writable(0)
-export const TitaniumP = writable(1)
-
-export const PlantS = writable(0)
-export const PlantP = writable(1)
-
-export const EnergyS = writable(0)
-export const EnergyP = writable(1)
-
-export const HeatS = writable(0)
-export const HeatP = writable(1)
+export const state = writable({
+  TR: 20,
+  Generation: 1,
+  MCreditS: 0,
+  MCreditP: 1,
+  SteelS: 0,
+  SteelP: 1,
+  TitaniumS: 0,
+  TitaniumP: 1,
+  PlantS: 0,
+  PlantP: 1,
+  EnergyS: 0,
+  EnergyP: 1,
+  HeatS: 0,
+  HeatP: 1,
+})
 
 export const logs = writable([])
 
 export const spendCredits = writable(false)
 export const creditRegister = writable([]) // [{ type, amount }]
 
+export const history = writable([]) // [{ committed, state }]
+
+state.subscribe($state => {
+  history.update($history => {
+    const stepIdx = $history
+      .map(({committed}) => committed)
+      .lastIndexOf(true) // last committed item
+
+    const history = stepIdx >= 0 ?
+      $history.slice(stepIdx) : // discard any committed undos
+      $history
+
+    return [
+      {
+        committed: false,
+        state: $state
+      },
+      ...history.map(item => ({ ...item, committed: false })) // reset
+    ]
+  })
+})
+
 // creditRegister: [{type, amount}]
-export const queueSpend = (spendCredits, creditRegister, creditRegister$, counterType, counter, counter$, counterFn) => {
+export const queueSpend = (spendCredits, creditRegister$, counterType, state$, counterFn) => {
   if(spendCredits){ // queue for commit
     // look for existing entry by type
     const reg = creditRegister$.find(({type}) => type === counterType)
@@ -54,6 +72,9 @@ export const queueSpend = (spendCredits, creditRegister, creditRegister$, counte
   }
 
   // commit now
-  counter.update(counterFn)
+  state.update(() => ({
+    ...state$,
+    [counterType]: counterFn(state$[counterType])
+  }))
 }
 
