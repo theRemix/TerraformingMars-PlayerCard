@@ -1,12 +1,14 @@
 <script>
 import { creditRegister } from './stores'
 import SpendCreditsControls from './SpendCreditsControls.svelte'
+import ResetControls from './ResetControls.svelte'
 
 </script>
 
 <div style="border:1px solid red;">
 
 <SpendCreditsControls />
+<ResetControls />
 
 
 </div>

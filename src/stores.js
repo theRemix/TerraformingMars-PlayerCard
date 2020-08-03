@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store'
 
-export const state = writable({
+const initialState = {
   TR: 20,
   Generation: 1,
   MCreditS: 0,
@@ -15,7 +15,17 @@ export const state = writable({
   EnergyP: 1,
   HeatS: 0,
   HeatP: 1,
-})
+}
+export const state = writable({})
+export const resetState = () => state.set(initialState)
+
+// ## SESSIONS ##
+if (Storage) {
+  state.set(JSON.parse(localStorage.getItem('state')))
+} else {
+  resetState()
+}
+
 
 export const logs = writable([])
 
@@ -25,6 +35,8 @@ export const creditRegister = writable([]) // [{ type, amount }]
 export const history = writable([]) // [{ committed, state }]
 
 state.subscribe($state => {
+
+  // ## HISTORY ##
   history.update($history => {
     const stepIdx = $history
       .map(({committed}) => committed)
@@ -42,6 +54,12 @@ state.subscribe($state => {
       ...history.map(item => ({ ...item, committed: false })) // reset
     ]
   })
+
+  // ## SESSIONS ##
+  if (Storage) {
+    localStorage.setItem('state', JSON.stringify($state))
+  }
+
 })
 
 // creditRegister: [{type, amount}]
