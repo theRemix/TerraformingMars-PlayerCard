@@ -14,6 +14,7 @@ const incP = () => queueSpend($spendCredits, creditRegister, $creditRegister, 'M
 </script>
 
 <div class="grid-area-container grid-area-container-mega-credits">
+  MEGA CREDITS
   <div class="grid-area-income grid-area-mega-credits">
     <div class="grid-area">
       <div class="counter">

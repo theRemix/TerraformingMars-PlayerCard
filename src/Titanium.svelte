@@ -13,12 +13,13 @@ const decP = () => queueSpend($spendCredits, creditRegister, $creditRegister, 'T
 const incP = () => queueSpend($spendCredits, creditRegister, $creditRegister, 'TitaniumP', TitaniumP, $TitaniumP, (n => n + 1))
 </script>
 
-<div class="grid-area-container grid-area-container-mega-credits">
-  <div class="grid-area-income grid-area-mega-credits">
+<div class="grid-area-container grid-area-container-titanium">
+  TITANIUM
+  <div class="grid-area-income grid-area-titanium">
     <div class="grid-area">
       <div class="counter">
         <div class="counter-label">
-          <span>MegaCredits Income</span>
+          <span>Titanium Income</span>
         </div>
         <div class="counter-count">
           { $TitaniumP }
@@ -36,7 +37,7 @@ const incP = () => queueSpend($spendCredits, creditRegister, $creditRegister, 'T
     </div>
   </div>
 
-  <div class="grid-area-resources grid-area-resources grid-area-resources-mega-credits">
+  <div class="grid-area-resources grid-area-resources grid-area-resources-titanium">
     <div class="grid-area">
       <div class="counter">
         <div class="counter-label">

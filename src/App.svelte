@@ -57,9 +57,19 @@
             </div>
           </div>
         </div>
-        <Plants />
-        <Energy />
-        <Heat />
+        <div class="main-row">
+          <div class="row">
+            <div class="column medium-4">
+              <Plants />
+            </div>
+            <div class="column medium-4">
+              <Energy />
+            </div>
+            <div class="column medium-4">
+              <Heat />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
