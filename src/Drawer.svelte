@@ -51,22 +51,57 @@ const commitSpendCredits = () => { // empty creditRegister
 }
 
 </script>
-<main>
-	<h2>Drawer</h2>
-  <button on:click={ productionPhase }>Production Phase</button>
-  {#if !$spendCredits}
-    <button on:click={ enableSpendCredits }>Spend Credits</button>
-  {:else}
-    <button on:click={ disableSpendCredits }>Cancel Spend Credits</button>
-    <button on:click={ commitSpendCredits }>Commit Spend Credits</button>
-  {/if}
 
-  <ul class="log">
-    {#each $creditRegister as item}
-      <li>
-        {item.type} : {item.amount >= 0 ? '+'+item.amount : item.amount}
-      </li>
-    {/each}
-  </ul>
+<div style="border:1px solid red;">
 
-</main>
+<button on:click={ productionPhase }>Production Phase</button>
+
+{#if !$spendCredits}
+  <button on:click={ enableSpendCredits }>Spend Credits</button>
+{:else}
+  <button on:click={ disableSpendCredits }>Cancel Spend Credits</button>
+  <button on:click={ commitSpendCredits }>Commit Spend Credits</button>
+{/if}
+
+</div> 
+
+<div class="grid-summary-container">
+  <div class="grid-summary">
+
+    <button class="clear-all-button" style="border:1px solid red;">Clear All</button>
+
+    <ul class="log grid-table">
+      {#each $creditRegister as item}
+        <li class="grid-table-row">
+          <div class="grid-table-resource">
+            <div class="spend-income spend-income-mega-credits">
+              {item.type}
+              <span>{item.type}</span>
+            </div>
+          </div>
+          <div class="grid-table-quantity">
+            {item.amount >= 0 ? '+'+item.amount : item.amount}
+          </div>
+          <div class="grid-table-mega-credits">
+          </div>
+        </li>
+      {/each}
+    </ul>
+
+    <div class="grid-table-row grid-table-summary">
+      <div class="grid-table-resource">
+        <div class="spend-resource spend-resource-mega-credits">
+          <span>MCR</span>
+        </div>
+      </div>
+      <div class="grid-table-quantity">
+        -4
+      </div>
+    </div>
+
+  </div>
+
+  <div class="grid-actions">
+    <button class="submit-button" style="border:1px solid red;">Submit</button>
+  </div>
+</div>
