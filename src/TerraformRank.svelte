@@ -11,15 +11,35 @@ const inc1 = () => queueSpend($spendCredits, creditRegister, $creditRegister, 'T
 const inc5 = () => queueSpend($spendCredits, creditRegister, $creditRegister, 'TR', TR, $TR, (n => n + 5))
 </script>
 
-<main>
+<div class="grid-area-container grid-area-container-tr">
+  <div class="grid-area-income grid-area-tr">
+    <div class="grid-area">
+      <div class="counter">
+        <div class="counter-label">
+          <span>TR Income</span>
+        </div>
+        <div class="counter-count">
+          { $TR }
+        </div>
+        <div class="counter-change">
+          +4
+        </div>
+      </div>
+      <div class="counter-buttons">
+        <div class="counter-buttons-resources counter-buttons-resources-five">
+          <button on:click={ inc5 } class="counter-button-resource plus">+</button>
+          <button on:click={ dec5 } class="counter-button-resource minus">-</button>
+        </div>
+        <div class="counter-buttons-resources counter-buttons-resources-one">
+          <button on:click={ inc1 } class="counter-button-resource plus">+</button>
+          <button on:click={ dec1 } class="counter-button-resource minus">-</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <h2>
   Generation { $Generation }
 </h2>
-<h2>
-  <button on:click={ dec5 }>-5</button>
-  <button on:click={ dec1 }>-1</button>
-  TR: { $TR }
-  <button on:click={ inc1 }>+1</button>
-  <button on:click={ inc5 }>+5</button>
-</h2>
-</main>
