@@ -1,12 +1,51 @@
 <script>
-import { onDestroy } from 'svelte'
+import { fly, fade } from 'svelte/transition'
 import { state, spendCredits, creditRegister, queueSpend } from './stores'
+import { createChangeCounter, updateCounterChange, counterChangeInAnim } from './utils'
 
-const dec8 = () => queueSpend($spendCredits, $creditRegister, 'PlantS', $state, (n => n - 8))
-const dec1 = () => queueSpend($spendCredits, $creditRegister, 'PlantS', $state, (n => n - 1))
-const inc1 = () => queueSpend($spendCredits, $creditRegister, 'PlantS', $state, (n => n + 1))
-const decP = () => queueSpend($spendCredits, $creditRegister, 'PlantP', $state, (n => n - 1))
-const incP = () => queueSpend($spendCredits, $creditRegister, 'PlantP', $state, (n => n + 1))
+let counterSChange = createChangeCounter('PlantS')
+let counterPChange = createChangeCounter('PlantP')
+
+const dec8 = () => {
+  queueSpend($spendCredits, $creditRegister, 'PlantS', $state, (n => n - 8))
+  counterSChange = updateCounterChange(
+    counterSChange,
+    (n => n - 8),
+    (reset) => counterSChange = reset
+  )
+}
+const dec1 = () => {
+  queueSpend($spendCredits, $creditRegister, 'PlantS', $state, (n => n - 1))
+  counterSChange = updateCounterChange(
+    counterSChange,
+    (n => n - 1),
+    (reset) => counterSChange = reset
+  )
+}
+const inc1 = () => {
+  queueSpend($spendCredits, $creditRegister, 'PlantS', $state, (n => n + 1))
+  counterSChange = updateCounterChange(
+    counterSChange,
+    (n => n + 1),
+    (reset) => counterSChange = reset
+  )
+}
+const decP = () => {
+  queueSpend($spendCredits, $creditRegister, 'PlantP', $state, (n => n - 1))
+  counterPChange = updateCounterChange(
+    counterPChange,
+    (n => n - 1),
+    (reset) => counterPChange = reset
+  )
+}
+const incP = () => {
+  queueSpend($spendCredits, $creditRegister, 'PlantP', $state, (n => n + 1))
+  counterPChange = updateCounterChange(
+    counterPChange,
+    (n => n + 1),
+    (reset) => counterPChange = reset
+  )
+}
 </script>
 
 <div class="grid-area-container grid-area-container-plants">
@@ -20,9 +59,11 @@ const incP = () => queueSpend($spendCredits, $creditRegister, 'PlantP', $state, 
         <div class="counter-count">
           { $state.PlantP }
         </div>
-        <div class="counter-change">
-          +4
+        {#if counterPChange.text !== ''}
+        <div class="counter-change" in:fly={counterChangeInAnim} out:fade>
+          { counterPChange.text }
         </div>
+        {/if}
       </div>
       <div class="counter-buttons">
         <div class="counter-buttons-resources counter-buttons-resources-one">
@@ -42,9 +83,11 @@ const incP = () => queueSpend($spendCredits, $creditRegister, 'PlantP', $state, 
         <div class="counter-count">
           { $state.PlantS }
         </div>
-        <div class="counter-change">
-          +4
+        {#if counterSChange.text !== ''}
+        <div class="counter-change" in:fly={counterChangeInAnim} out:fade>
+          { counterSChange.text }
         </div>
+        {/if}
       </div>
       <div class="counter-buttons">
         <div class="counter-buttons-resources counter-buttons-resources-plant-tile">

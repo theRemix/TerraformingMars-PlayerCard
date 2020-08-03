@@ -1,13 +1,59 @@
 <script>
-import { onDestroy } from 'svelte'
+import { fly, fade } from 'svelte/transition'
 import { state, spendCredits, creditRegister, queueSpend } from './stores'
+import { createChangeCounter, updateCounterChange, counterChangeInAnim } from './utils'
 
-const dec5 = () => queueSpend($spendCredits, $creditRegister, 'TitaniumS', $state, (n => n - 5))
-const dec1 = () => queueSpend($spendCredits, $creditRegister, 'TitaniumS', $state, (n => n - 1))
-const inc1 = () => queueSpend($spendCredits, $creditRegister, 'TitaniumS', $state, (n => n + 1))
-const inc5 = () => queueSpend($spendCredits, $creditRegister, 'TitaniumS', $state, (n => n + 5))
-const decP = () => queueSpend($spendCredits, $creditRegister, 'TitaniumP', $state, (n => n - 1))
-const incP = () => queueSpend($spendCredits, $creditRegister, 'TitaniumP', $state, (n => n + 1))
+let counterSChange = createChangeCounter('TitaniumS')
+let counterPChange = createChangeCounter('TitaniumP')
+
+const dec5 = () => {
+  queueSpend($spendCredits, $creditRegister, 'TitaniumS', $state, (n => n - 5))
+  counterSChange = updateCounterChange(
+    counterSChange,
+    (n => n - 5),
+    (reset) => counterSChange = reset
+  )
+}
+const dec1 = () => {
+  queueSpend($spendCredits, $creditRegister, 'TitaniumS', $state, (n => n - 1))
+  counterSChange = updateCounterChange(
+    counterSChange,
+    (n => n - 1),
+    (reset) => counterSChange = reset
+  )
+}
+const inc1 = () => {
+  queueSpend($spendCredits, $creditRegister, 'TitaniumS', $state, (n => n + 1))
+  counterSChange = updateCounterChange(
+    counterSChange,
+    (n => n + 1),
+    (reset) => counterSChange = reset
+  )
+}
+const inc5 = () => {
+  queueSpend($spendCredits, $creditRegister, 'TitaniumS', $state, (n => n + 5))
+  counterSChange = updateCounterChange(
+    counterSChange,
+    (n => n + 5),
+    (reset) => counterSChange = reset
+  )
+}
+const decP = () => {
+  queueSpend($spendCredits, $creditRegister, 'TitaniumP', $state, (n => n - 1))
+  counterPChange = updateCounterChange(
+    counterPChange,
+    (n => n - 1),
+    (reset) => counterPChange = reset
+  )
+}
+const incP = () => {
+  queueSpend($spendCredits, $creditRegister, 'TitaniumP', $state, (n => n + 1))
+  counterPChange = updateCounterChange(
+    counterPChange,
+    (n => n + 1),
+    (reset) => counterPChange = reset
+  )
+}
 </script>
 
 <div class="grid-area-container grid-area-container-titanium">
@@ -21,9 +67,11 @@ const incP = () => queueSpend($spendCredits, $creditRegister, 'TitaniumP', $stat
         <div class="counter-count">
           { $state.TitaniumP }
         </div>
-        <div class="counter-change">
-          +4
+        {#if counterPChange.text !== ''}
+        <div class="counter-change" in:fly={counterChangeInAnim} out:fade>
+          { counterPChange.text }
         </div>
+        {/if}
       </div>
       <div class="counter-buttons">
         <div class="counter-buttons-resources counter-buttons-resources-one">
@@ -43,9 +91,11 @@ const incP = () => queueSpend($spendCredits, $creditRegister, 'TitaniumP', $stat
         <div class="counter-count">
           { $state.TitaniumS }
         </div>
-        <div class="counter-change">
-          +4
+        {#if counterSChange.text !== ''}
+        <div class="counter-change" in:fly={counterChangeInAnim} out:fade>
+          { counterSChange.text }
         </div>
+        {/if}
       </div>
       <div class="counter-buttons">
         <div class="counter-buttons-resources counter-buttons-resources-five">
