@@ -1,8 +1,7 @@
 <script>
   import Drawer from './Drawer.svelte'
   import TerraformRank from './TerraformRank.svelte'
-  import ProductionPhaseControls from './ProductionPhaseControls.svelte'
-  import HistoryControls from './HistoryControls.svelte'
+  import Generation from './Generation.svelte'
   import MegaCredits from './MegaCredits.svelte'
   import Steel from './Steel.svelte'
   import Titanium from './Titanium.svelte'
@@ -25,10 +24,7 @@
               <TerraformRank />
             </div>
             <div class="column medium-4 production-button-column">
-              <ProductionPhaseControls />
-            </div>
-            <div class="column action-buttons-column">
-              <HistoryControls />
+              <Generation />
             </div>
           </div>
         </div>

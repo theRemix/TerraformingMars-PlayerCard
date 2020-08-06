@@ -18,6 +18,7 @@ const initialState = {
 }
 export const state = writable({})
 export const resetState = () => state.set(initialState)
+export const resetConfirmVisible = writable(false)
 
 // ## SESSIONS ##
 if (Storage && localStorage.getItem('state')) {

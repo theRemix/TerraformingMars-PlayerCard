@@ -1,5 +1,6 @@
 <script>
-import { state, spendCredits, creditRegister, creditRegisterTotal } from './stores'
+import { state, spendCredits, creditRegister, creditRegisterTotal, resetConfirmVisible } from './stores'
+import HistoryControls from './HistoryControls.svelte'
 import ResetControls from './ResetControls.svelte'
 
 // item: {type, amount}
@@ -40,9 +41,13 @@ const commitSpendCredits = () => { // empty creditRegister
 
 {#if !$spendCredits}
   <button on:click={ enableSpendCredits }>Spend Credits</button>
-{/if}
 
-<ResetControls />
+  <ResetControls />
+
+  {#if !$resetConfirmVisible}
+    <HistoryControls />
+  {/if}
+{/if}
 
 
 </div>
@@ -72,21 +77,23 @@ const commitSpendCredits = () => { // empty creditRegister
       {/each}
     </ul>
 
-    <div class="grid-table-row grid-table-summary">
-      <div class="grid-table-resource">
-        <div class="spend-resource spend-resource-mega-credits">
-          <span>MCR</span>
+    {#if $spendCredits && $creditRegister.length}
+      <div class="grid-table-row grid-table-summary">
+        <div class="grid-table-resource">
+          <div class="spend-resource spend-resource-mega-credits">
+            <span>MCR</span>
+          </div>
+        </div>
+        <div class="grid-table-quantity">
+          {$creditRegisterTotal}
         </div>
       </div>
-      <div class="grid-table-quantity">
-        {$creditRegisterTotal}
-      </div>
-    </div>
+    {/if}
 
   </div>
 
   <div class="grid-actions">
-  {#if $spendCredits}
+  {#if $spendCredits && $creditRegister.length}
     <button class="submit-button" style="border:1px solid red;" on:click={ commitSpendCredits }>Submit</button>
   {/if}
   </div>

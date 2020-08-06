@@ -1,16 +1,15 @@
 <script>
-import { resetState } from './stores'
+import { resetState, resetConfirmVisible } from './stores'
 
-let confirmModal = false
-const showConfirm = () => confirmModal = true
-const hideConfirm = () => confirmModal = false
+const showConfirm = () => resetConfirmVisible.set(true)
+const hideConfirm = () => resetConfirmVisible.set(false)
 const resetBoard = () => {
   resetState()
-  confirmModal = false
+  hideConfirm()
 }
 </script>
 
-{#if !confirmModal}
+{#if !$resetConfirmVisible}
   <button on:click={ showConfirm }>Reset Board</button>
 {:else}
   <button on:click={ hideConfirm }>Cancel</button>
