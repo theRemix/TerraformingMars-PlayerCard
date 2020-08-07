@@ -3,19 +3,23 @@ import { state, spendCredits, creditRegister, creditRegisterTotal, resetConfirmV
 import HistoryControls from './HistoryControls.svelte'
 import ResetControls from './ResetControls.svelte'
 
-// item: {type, amount}
-const itemQuantityFormat = ({ type, amount }) => {
-  const amountStr = amount >= 0 ? '+'+amount : amount
+// item: {type, amount} => "+/- amount"
+const itemQuantityFormat = ({ amount }) =>
+  amount >= 0 ? '+'+amount : amount
+
+// item: {type, amount} => "(+/i mc)"
+const itemQuantityConvertedFormat = ({ type, amount }) => {
+  const prefixStr = amount >= 0 ? '+' : ''
 
   switch(type){
     case 'SteelS':
-      return `${amountStr} (${amount * 2} M€)`
+      return `${prefixStr}${amount * 2}`
       break
     case 'TitaniumS':
-      return `${amountStr} (${amount * 3} M€)`
+      return `${prefixStr}${amount * 3}`
       break
     default:
-      return amountStr
+      return ''
   }
 }
 
@@ -70,9 +74,11 @@ const commitSpendCredits = () => { // empty creditRegister
             <div class="counter-label spend spend-{item.type}">
               <span>{item.type}</span>
             </div>
-            <div style="border: 1px solid red;" class="grid-table-mega-credits">
-              -0 <span class="mini-counter-label"></span>
-            </div>
+            {#if itemQuantityConvertedFormat(item)}
+              <div style="border: 1px solid red;" class="grid-table-mega-credits">
+                {itemQuantityConvertedFormat(item)} <span class="mini-counter-label"></span>
+              </div>
+            {/if}
           </div>
         </li>
       {/each}

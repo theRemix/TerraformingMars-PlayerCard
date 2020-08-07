@@ -44,8 +44,10 @@ export const creditRegisterTotal = derived(
         case 'TitaniumS':
           return total + amount * 3
           break
-        default:
+        case 'MCreditS':
           return total + amount
+        default:
+          return total
       }
     }, 0)
 )
