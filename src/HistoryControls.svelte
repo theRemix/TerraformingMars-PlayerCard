@@ -46,13 +46,11 @@ const redo = () => {
 }
 </script>
 
-<div class="grid-area">
-  <div class="action-buttons">
-    <button class="button-undo" on:click={ undo }>
-      ↺
-    </button>
-    <button class="button-redo" on:click={ redo }>
-      ↻
-    </button>
-  </div>
+<div class="undo-redo-buttons">
+  <button class="button-undo" on:click={ undo }>
+    ↺
+  </button>
+  <button class="button-redo" on:click={ redo }>
+    ↻
+  </button>
 </div>

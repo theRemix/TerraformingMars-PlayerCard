@@ -20,10 +20,10 @@
       <div class="main">
         <div class="main-header">
           <div class="row">
-            <div class="column medium-4 tr-column">
+            <div class="column medium-6">
               <TerraformRank />
             </div>
-            <div class="column medium-4 production-button-column">
+            <div class="column medium-6">
               <Generation />
             </div>
           </div>

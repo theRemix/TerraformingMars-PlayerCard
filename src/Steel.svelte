@@ -56,14 +56,15 @@ const incP = () => {
 }
 </script>
 
-<div class="grid-area-container grid-area-container-steel">
-  STEEL
-  <div class="grid-area-income grid-area-steel">
+<div class="grid-area-container grid-area-container">
+  <div class="grid-area-income grid-area-SteelP">
     <div class="grid-area">
-      <div class="counter">
-        <div class="counter-label">
-          <span>Steel Income</span>
+      <div class="counter-buttons">
+        <div class="counter-buttons-resources">
+          <button on:click={ decP } class="counter-button-resource">-1</button>
         </div>
+      </div>
+      <div class="counter">
         <div class="counter-count">
           { $state.SteelP }
         </div>
@@ -74,22 +75,27 @@ const incP = () => {
         {/if}
       </div>
       <div class="counter-buttons">
-        <div class="counter-buttons-resources counter-buttons-resources-one">
-          <button on:click={ incP } class="counter-button-resource plus">+</button>
-          <button on:click={ decP } class="counter-button-resource minus">-</button>
+        <div class="counter-buttons-resources">
+          <button on:click={ incP } class="counter-button-resource">+1</button>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="grid-area-resources grid-area-resources grid-area-resources-steel">
+  <div class="grid-area-resources grid-area-SteelS">
     <div class="grid-area">
-      <div class="counter">
-        <div class="counter-label">
-          <span>Steel Resources</span>
+      <div class="counter-buttons">
+        <div class="counter-buttons-resources">
+          <button on:click={ dec1 } class="counter-button-resource minus">-1</button>
+          <button on:click={ dec5 } class="counter-button-resource minus">-5</button>
         </div>
+      </div>
+      <div class="counter">
         <div class="counter-count">
           { $state.SteelS }
+        </div>
+        <div class="counter-label">
+          <span>Steel</span>
         </div>
         {#if counterSChange.text !== ''}
         <div class="counter-change" in:fly={counterChangeInAnim} out:fade>
@@ -98,15 +104,12 @@ const incP = () => {
         {/if}
       </div>
       <div class="counter-buttons">
-        <div class="counter-buttons-resources counter-buttons-resources-five">
-          <button on:click={ inc5 } class="counter-button-resource plus">+</button>
-          <button on:click={ dec5 } class="counter-button-resource minus">-</button>
-        </div>
-        <div class="counter-buttons-resources counter-buttons-resources-one">
-          <button on:click={ inc1 } class="counter-button-resource plus">+</button>
-          <button on:click={ dec1 } class="counter-button-resource minus">-</button>
+        <div class="counter-buttons-resources">
+          <button on:click={ inc1 } class="counter-button-resource plus">+1</button>
+          <button on:click={ inc5 } class="counter-button-resource plus">+5</button>
         </div>
       </div>
     </div>
   </div>
 </div>
+

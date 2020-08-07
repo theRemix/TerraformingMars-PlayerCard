@@ -10,7 +10,8 @@ const resetBoard = () => {
 </script>
 
 {#if !$resetConfirmVisible}
-  <button on:click={ showConfirm }>Reset Board</button>
+  <!-- Disable if in Spend Mode -->
+  <button class="button-reset" on:click={ showConfirm }>☰</button>
 {:else}
   <button on:click={ hideConfirm }>Cancel</button>
   <button on:click={ resetBoard }>Confirm</button>
