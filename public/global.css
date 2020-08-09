@@ -447,18 +447,18 @@ div.counter-button-resource-placeholder {
 }
 
 .column.main-column {
-  flex: 1 0 50%;
+  flex: 0 0 75%;
   max-height: 100vh;
 }
 @media only screen and (min-width: 350px) {
   .column.main-column {
-    flex: 3 0 50%;
+    flex: 1 0 75%;
   }
 }
 
 .column.summary-column {
   margin: 6px 6px 0 6px;
-  flex: 1 0 70%;
+  flex: 1 0 25%;
   padding: 0;
   display: flex;
   flex-flow: column nowrap;
@@ -466,7 +466,7 @@ div.counter-button-resource-placeholder {
 @media only screen and (min-width: 350px) {
   .column.summary-column {
     margin: 6px 0 6px 6px;
-    flex: 1 1 130px;
+    flex: 0 1 130px;
     max-width: 200px;
   }
 }
