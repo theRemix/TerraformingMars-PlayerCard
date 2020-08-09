@@ -9,7 +9,7 @@ const productionPhase = () => {
     Generation: state.Generation + 1,
 
     // EnergyS -> HeatS
-    HeatS: state.HeatS + state.EnergyS,
+    HeatS: state.HeatS + state.EnergyS + state.HeatP,
 
     // Income = TR + MCP
     MCreditS: state.MCreditS + state.TR + state.MCreditP,
@@ -18,8 +18,7 @@ const productionPhase = () => {
     SteelS: state.SteelS + state.SteelP,
     TitaniumS: state.TitaniumS + state.TitaniumP,
     PlantS: state.PlantS + state.PlantP,
-    EnergyS: state.EnergyS + state.EnergyP,
-    HeatS: state.HeatS + state.HeatP,
+    EnergyS: state.EnergyP,
   }))
 }
 
