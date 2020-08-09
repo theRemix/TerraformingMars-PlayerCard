@@ -117,23 +117,14 @@ button:focus {
 
 .grid-area-income {
   flex: 0 1 auto;
-  border-bottom: 1px solid #cbd0d1;
   display: flex;
-  border-top-right-radius: 3px;
-  border-top-left-radius: 3px;
   background-color: #cbd0d1;
 }
 
 .grid-area-resources {
   flex: 1 1 auto;
   display: flex;
-  border-bottom-right-radius: 3px;
-  border-bottom-left-radius: 3px;
   background-color: #FFFFFF;
-}
-.grid-area-resources.grid-area-generation, .grid-area-resources.grid-area-TR {
-  border-top-right-radius: 3px;
-  border-top-left-radius: 3px;
 }
 
 .button-production {
@@ -153,7 +144,7 @@ button:focus {
 .counter {
   flex: 1 1 auto;
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
   position: relative;
@@ -162,10 +153,10 @@ button:focus {
 .counter-label {
   width: 18px;
   height: 18px;
-  margin-top: 6px;
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
+  position: relative;
 }
 .counter-label span {
   display: none;
@@ -182,15 +173,24 @@ button:focus {
 
 .counter-count {
   z-index: 1;
-  padding-right: 5px;
   font-weight: bold;
+  padding: 0 4px;
 }
 .grid-area-income .counter-count {
-  font-size: 1.25em;
-  padding-right: 0;
+  font-size: 1em;
+}
+@media only screen and (min-width: 567px) {
+  .grid-area-income .counter-count {
+    font-size: 1.25em;
+  }
 }
 .grid-area-resources .counter-count {
-  font-size: 2.25em;
+  font-size: 1.75em;
+}
+@media only screen and (min-width: 567px) {
+  .grid-area-resources .counter-count {
+    font-size: 2em;
+  }
 }
 
 .counter-change {
@@ -198,14 +198,12 @@ button:focus {
   margin-top: -40px;
   z-index: 2;
   font-size: 0.7em;
-  padding-right: 5px;
 }
 .grid-area-income .counter-change {
   margin-top: -32px;
-  padding-right: 0;
 }
 .grid-area-resources .counter-change {
-  margin-top: -43px;
+  margin-top: -55px;
 }
 
 .counter-buttons {
@@ -228,18 +226,23 @@ div.counter-button-resource-placeholder {
 }
 
 .counter-button-resource {
-  flex: 1 0 50%;
+  flex: 1 1 50%;
   width: 40px;
   padding: 13px;
   display: block;
-  border-radius: 0;
 }
 .counter-button-resource + .counter-button-resource {
   border-top: 1px solid #e6e8e9;
 }
 
+.button-spacer {
+  width: 40px;
+  display: block;
+  flex: 4 4 10px;
+}
+
 .grid-area-income .counter-button-resource {
-  border-top-left-radius: 3px;
+  color: #FFFFFF;
 }
 .grid-area-income .counter-button-resource:hover {
   background-color: #bdc3c6;
@@ -247,18 +250,12 @@ div.counter-button-resource-placeholder {
 .grid-area-income .counter {
   border-left: 1px solid #afb7ba;
   border-right: 1px solid #afb7ba;
-}
-.grid-area-income .counter + .counter-buttons .counter-button-resource {
-  border-top-left-radius: 0;
-  border-top-right-radius: 3px;
+  color: #FFFFFF;
 }
 
 .grid-area-resources .counter {
   border-left: 1px solid #e6e8e9;
   border-right: 1px solid #e6e8e9;
-}
-.grid-area-resources .counter-button-resource + .counter-button-resource {
-  border-bottom-left-radius: 3px;
 }
 .grid-area-resources .counter-button-resource:hover {
   background-color: #eef0f0;
@@ -276,61 +273,182 @@ div.counter-button-resource-placeholder {
   background-color: transparent;
   cursor: default;
 }
-.grid-area-resources .counter + .counter-buttons .counter-button-resource {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 3px;
-}
-.grid-area-resources.grid-area-TR .counter-button-resource, .grid-area-resources.grid-area-generation .counter-button-resource {
-  border-top-left-radius: 3px;
-}
-.grid-area-resources.grid-area-TR .counter-button-resource + .counter-button-resource, .grid-area-resources.grid-area-generation .counter-button-resource + .counter-button-resource {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 3px;
-}
-.grid-area-resources.grid-area-TR .counter + .counter-buttons .counter-button-resource, .grid-area-resources.grid-area-generation .counter + .counter-buttons .counter-button-resource {
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 0;
-}
-.grid-area-resources.grid-area-TR .counter + .counter-buttons .counter-button-resource + .counter-button-resource, .grid-area-resources.grid-area-generation .counter + .counter-buttons .counter-button-resource + .counter-button-resource {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 3px;
-}
 
-.temperature,
-.plant-tile {
-  display: flex;
-  flex-flow: column nowrap;
-  padding: 0;
+.grid-area-income.grid-area-MCreditP,
+.grid-area-income.grid-area-SteelP,
+.grid-area-income.grid-area-TitaniumP {
+  position: relative;
 }
-
-.grid-area-TR .counter-count {
-  padding-right: 2px;
-}
-.grid-area-TR .counter-label {
-  width: auto;
-  height: auto;
-  padding-top: 8px;
-}
-.grid-area-TR .counter-label span {
-  display: block;
-  font-weight: bold;
-}
-
-.grid-area-generation .counter-count {
-  padding-right: 0;
-}
-.grid-area-generation .counter-label {
+.grid-area-income.grid-area-MCreditP:before,
+.grid-area-income.grid-area-SteelP:before,
+.grid-area-income.grid-area-TitaniumP:before {
+  content: " ";
   position: absolute;
-  width: auto;
-  font-size: 12px;
-  margin-top: 55px;
+  width: 0;
+  height: 0;
+  top: 0;
+  left: 50%;
+  margin-left: -18px;
+  margin-top: -14px;
+  border-top: 7px solid transparent;
+  border-left: 18px solid transparent;
+  border-bottom: 7px solid #cbd0d1;
+  border-right: 18px solid transparent;
 }
-.grid-area-generation .counter-label span {
+
+.grid-area-income.grid-area-PlantP,
+.grid-area-income.grid-area-EnergyP,
+.grid-area-income.grid-area-HeatP {
+  position: relative;
+}
+.grid-area-income.grid-area-PlantP:after,
+.grid-area-income.grid-area-EnergyP:after,
+.grid-area-income.grid-area-HeatP:after {
+  content: " ";
+  position: absolute;
+  width: 0;
+  height: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -18px;
+  margin-bottom: -14px;
+  border-bottom: 7px solid transparent;
+  border-left: 18px solid transparent;
+  border-top: 7px solid #cbd0d1;
+  border-right: 18px solid transparent;
+}
+
+.grid-area-resources.grid-area-MCreditS {
+  color: #f1a830;
+}
+
+.grid-area-resources.grid-area-SteelS {
+  color: #745339;
+}
+
+.grid-area-resources.grid-area-TitaniumS {
+  color: #6d787d;
+}
+
+.grid-area-resources.grid-area-PlantS {
+  color: #749838;
+}
+
+.grid-area-resources.grid-area-EnergyS {
+  color: #682A7E;
+}
+
+.grid-area-resources.grid-area-HeatS {
+  color: #c24621;
+}
+
+.grid-area-resources.grid-area-TR {
+  color: #DE7629;
+}
+.grid-area-resources.grid-area-TR .counter-label {
+  width: auto;
+  font-weight: bold;
+  font-size: 0.8em;
+}
+.grid-area-resources.grid-area-TR .counter-label span {
   display: block;
+  font-size: 0.8em;
+  position: initial;
+  width: auto;
+  margin-left: 0;
+  text-align: center;
+  bottom: initial;
+  height: auto;
+  line-height: 15px;
+}
+
+.grid-area-income.grid-area-MCreditP {
+  background-color: #f1a830;
+}
+.grid-area-income.grid-area-MCreditP:before {
+  border-bottom: 7px solid #f1a830;
+}
+.grid-area-income.grid-area-MCreditP .counter {
+  border-left-color: #f6c678;
+  border-right-color: #f6c678;
+}
+.grid-area-income.grid-area-MCreditP .counter-button-resource:hover {
+  background-color: #df900f;
+}
+
+.grid-area-income.grid-area-SteelP {
+  background-color: #745339;
+}
+.grid-area-income.grid-area-SteelP:before {
+  border-bottom: 7px solid #745339;
+}
+.grid-area-income.grid-area-SteelP .counter {
+  border-left-color: #966b4a;
+  border-right-color: #966b4a;
+}
+.grid-area-income.grid-area-SteelP .counter-button-resource:hover {
+  background-color: #634731;
+}
+
+.grid-area-income.grid-area-TitaniumP {
+  background-color: #6d787d;
+}
+.grid-area-income.grid-area-TitaniumP:before {
+  border-bottom: 7px solid #6d787d;
+}
+.grid-area-income.grid-area-TitaniumP .counter {
+  border-left-color: #869296;
+  border-right-color: #869296;
+}
+.grid-area-income.grid-area-TitaniumP .counter-button-resource:hover {
+  background-color: #616b6f;
+}
+
+.grid-area-income.grid-area-PlantP {
+  background-color: #749838;
+}
+.grid-area-income.grid-area-PlantP:after {
+  border-top: 7px solid #749838;
+}
+.grid-area-income.grid-area-PlantP .counter {
+  border-left-color: #91bb48;
+  border-right-color: #91bb48;
+}
+.grid-area-income.grid-area-PlantP .counter-button-resource:hover {
+  background-color: #668531;
+}
+
+.grid-area-income.grid-area-EnergyP {
+  background-color: #783091;
+}
+.grid-area-income.grid-area-EnergyP:after {
+  border-top: 7px solid #783091;
+}
+.grid-area-income.grid-area-EnergyP .counter {
+  border-left-color: #973db7;
+  border-right-color: #973db7;
+}
+.grid-area-income.grid-area-EnergyP .counter-button-resource:hover {
+  background-color: #682A7E;
+}
+
+.grid-area-income.grid-area-HeatP {
+  background-color: #c24621;
+}
+.grid-area-income.grid-area-HeatP:after {
+  border-top: 7px solid #c24621;
+}
+.grid-area-income.grid-area-HeatP .counter {
+  border-left-color: #dd5f39;
+  border-right-color: #dd5f39;
+}
+.grid-area-income.grid-area-HeatP .counter-button-resource:hover {
+  background-color: #9f391b;
 }
 
 .column.main-column {
   flex: 1 0 50%;
+  max-height: 100vh;
 }
 @media only screen and (min-width: 350px) {
   .column.main-column {
@@ -344,13 +462,12 @@ div.counter-button-resource-placeholder {
   padding: 0;
   display: flex;
   flex-flow: column nowrap;
-  background-color: #FFFFFF;
-  border-radius: 3px;
 }
 @media only screen and (min-width: 350px) {
   .column.summary-column {
     margin: 6px 0 6px 6px;
-    flex: 1 1 100px;
+    flex: 1 1 130px;
+    max-width: 200px;
   }
 }
 
@@ -358,31 +475,67 @@ div.counter-button-resource-placeholder {
   flex: 0 0 auto;
   width: 100%;
   display: flex;
-  border-bottom: 1px solid #e6e8e9;
 }
 
-.undo-redo-buttons {
-  flex: 0 0 auto;
-  width: 100%;
+.generation {
+  flex: 1 1 50px;
   display: flex;
-  padding: 0 10px;
-  margin: 50px 0 0;
+  flex-flow: row nowrap;
+}
+.generation .generation-count {
+  font-size: 1.25em;
+  font-weight: bold;
+  color: #cbd0d1;
+  flex: 1 1 30px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #313739;
+  border-right: 1px solid #e6e8e9;
+  background-color: #FFFFFF;
+}
+
+.sidebar-tr {
+  margin-top: 6px;
+}
+
+.normal-mode {
+  background-color: #313739;
+  flex: 1 1 auto;
+  display: flex;
+  flex-flow: column nowrap;
 }
 
 .switch-mode-button {
   flex: 0 0 auto;
   width: 100%;
   display: flex;
-  padding: 0 10px;
-  margin: 10px 0 0;
+  padding: 0 6px;
+  margin: 12px 0 0;
+}
+
+.undo-redo-buttons {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  padding: 0 6px;
+  margin: auto;
+}
+
+.spend-mode {
+  flex: 1 0 auto;
+  margin-top: 6px;
+  background-color: #FFFFFF;
 }
 
 .exit-spend-mode-button {
   flex: 0 0 auto;
   width: 100%;
   display: flex;
-  padding: 0 10px;
-  margin-top: 10px;
+  padding: 0 6px;
+  margin-top: 6px;
 }
 
 .grid-summary-container {
@@ -390,15 +543,7 @@ div.counter-button-resource-placeholder {
   width: 100%;
   display: flex;
   flex-flow: column nowrap;
-  margin-top: 5px;
-}
-
-.grid-actions {
-  flex: 0 0 auto;
-  width: 100%;
-  display: flex;
-  margin-bottom: auto;
-  padding: 0 10px 10px;
+  margin-top: 6px;
 }
 
 .grid-summary {
@@ -410,7 +555,7 @@ div.counter-button-resource-placeholder {
 .grid-table {
   margin: auto 0;
   flex: 0 0 auto;
-  padding: 10px 10px 10px;
+  padding: 6px;
 }
 
 .grid-table-row {
@@ -434,11 +579,11 @@ div.counter-button-resource-placeholder {
   flex-flow: row nowrap;
   justify-content: flex-end;
   align-items: center;
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: bold;
 }
 .grid-table-resource .spend {
-  margin: 0 10px 0 15px;
+  margin: 0 5px 0 5px;
   flex: 0 0 26px;
 }
 .grid-table-resource .spend span {
@@ -451,29 +596,18 @@ div.counter-button-resource-placeholder {
 .spend-PlantP,
 .spend-EnergyP,
 .spend-HeatP {
-  border: 4px solid #e6e8e9;
+  border: 4px solid #cbd0d1;
   height: 26px;
   border-radius: 3px;
 }
 
 .grid-table-mega-credits {
   flex: 0 0 30%;
-  padding-left: 4px;
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-start;
   align-items: center;
   font-size: 0.8em;
-}
-.grid-table-mega-credits:before {
-  content: "( ";
-  font-size: 1.25em;
-  font-weight: 300;
-}
-.grid-table-mega-credits:after {
-  content: " )";
-  font-size: 1.25em;
-  font-weight: 300;
 }
 .grid-table-mega-credits span {
   font-size: 1.2em;
@@ -481,9 +615,18 @@ div.counter-button-resource-placeholder {
 }
 
 .grid-table-summary {
-  margin: 5px 10px 15px;
+  margin: 0 6px 0;
   border-top: 1px solid #e6e8e9;
-  padding: 10px 0;
+  padding: 6px 0;
+}
+
+.grid-actions {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  margin-bottom: auto;
+  margin-top: 6px;
+  padding: 0 6px 6px;
 }
 
 .button-redo,
@@ -492,96 +635,108 @@ div.counter-button-resource-placeholder {
   width: auto;
   font-size: 1.1rem;
   padding: 8px 0;
-  color: #bdc3c6;
+  background-color: #6d787d;
+  color: #313739;
 }
 .button-redo:hover,
 .button-undo:hover {
-  background-color: #e6e8e9;
-  color: #949ea2;
+  background-color: #555e62;
 }
 
 .button-undo {
-  border: 1px solid #e6e8e9;
   border-right: none;
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
 }
 
 .button-redo {
-  border: 1px solid #e6e8e9;
+  border-left: 1px solid #313739;
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
 }
 
+.button-cancel,
+.button-confirm,
 .button-switch,
 .button-exit,
 .button-buy {
   flex: 1 0 auto;
   width: 100%;
-  padding: 12px;
+  padding: 10px;
   font-size: 0.9rem;
   text-align: center;
 }
 
-.button-reset {
-  flex: 0 0 41px;
-  height: 41px;
-}
-.button-reset:hover {
+.button-switch {
   color: #616b6f;
+  border: 1px solid #495154;
+  border-radius: 3px;
+}
+.button-switch:hover {
+  border-color: #6d787d;
+  color: #869296;
 }
 
-.button-switch,
+.button-reset {
+  color: #616b6f;
+  flex: 0 1 41px;
+  height: 41px;
+  padding-right: 6px;
+}
+.button-reset:hover {
+  color: #cbd0d1;
+}
+
+.button-generation {
+  flex: 0 0 40px;
+  height: 41px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  color: #313739;
+  background-color: #FFFFFF;
+  padding-bottom: 3px;
+}
+.button-generation:hover {
+  background-color: #e6e8e9;
+}
+
 .button-exit {
   color: #949ea2;
   border-radius: 3px;
   border: 1px solid #e6e8e9;
 }
-.button-switch:hover,
 .button-exit:hover {
   background-color: #e6e8e9;
 }
 
+.button-confirm,
+.button-cancel,
 .button-buy {
-  background-color: #95BE4F;
+  background-color: #749838;
   color: #FFFFFF;
   border-radius: 3px;
   font-weight: bold;
 }
+.button-confirm:hover,
+.button-cancel:hover,
 .button-buy:hover {
-  background-color: #7a9f3b;
+  background-color: #58732a;
 }
 
-.grid-area-TR {
-  color: #DE7629;
+.button-cancel {
+  background-color: #6d787d;
+}
+.button-cancel:hover {
+  background-color: #555e62;
 }
 
-.grid-area-Generation {
-  color: #646464;
+.button-confirm {
+  background-color: #c24621;
 }
-
-.grid-area-MCreditS {
-  color: #F8B443;
-}
-
-.grid-area-SteelS {
-  color: #745339;
-}
-
-.grid-area-TitaniumS {
-  color: #646464;
-}
-
-.grid-area-PlantS {
-  color: #95BE4F;
-}
-
-.grid-area-EnergyS {
-  color: #682A7E;
-}
-
-.grid-area-HeatS {
-  color: #C25621;
+.button-confirm:hover {
+  background-color: #96361a;
 }
 
 .mini-counter-label,
@@ -604,13 +759,13 @@ div.counter-button-resource-placeholder {
 .spend-TitaniumP,
 .spend-TitaniumS,
 .grid-area-TitaniumS .counter-label {
-  background-image: url("https://placehold.it/50x50/AAAAAA/FFFFFF");
+  background-image: url("https://placehold.it/50x50/6d787d/FFFFFF");
 }
 
 .spend-PlantP,
 .spend-PlantS,
 .grid-area-PlantS .counter-label {
-  background-image: url("https://placehold.it/50x50/95BE4F/FFFFFF");
+  background-image: url("https://placehold.it/50x50/749838/FFFFFF");
 }
 
 .spend-EnergyP,
@@ -625,25 +780,103 @@ div.counter-button-resource-placeholder {
   background-image: url("https://placehold.it/50x50/C25621/FFFFFF");
 }
 
-h1 {
-  flex: 1 1 50px;
-  font-size: 0.8rem;
-  line-height: 1.1;
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: flex-start;
-  justify-content: center;
-  display: none;
-}
-h1 span.game {
-  font-weight: bold;
-}
-
 p.placeholder-text {
-  padding: 0 20px;
+  padding: 10px 20px;
   font-size: 0.9em;
   color: #a2abae;
   line-height: 1.4;
   margin: auto 0;
   text-align: center;
+}
+
+.counter-button-resource-plants {
+  padding-left: 0;
+  padding-right: 0;
+}
+.counter-button-resource-plants .counter-button-inner {
+  position: relative;
+}
+.counter-button-resource-plants span.counter-button-plants-graphic {
+  display: block;
+  width: 40px;
+  height: 40px;
+  background-image: url("https://placehold.it/40x40/");
+  background-size: 30px auto;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.counter-button-resource-plants span.counter-button-plants-amount {
+  position: absolute;
+  bottom: -7px;
+  right: 0;
+  padding-right: 4px;
+}
+
+.counter-button-resource-heat {
+  padding-left: 0;
+  padding-right: 0;
+}
+.counter-button-resource-heat .counter-button-inner {
+  position: relative;
+}
+.counter-button-resource-heat span.counter-button-heat-graphic {
+  display: block;
+  width: 40px;
+  height: 40px;
+  background-image: url("https://placehold.it/40x40/");
+  background-size: 30px auto;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.counter-button-resource-heat span.counter-button-heat-amount {
+  position: absolute;
+  bottom: -7px;
+  right: 0;
+  padding-right: 4px;
+}
+
+.modal-bg {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  flex: 0 0 70%;
+  background-color: #FFFFFF;
+  border-radius: 3px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
+}
+
+.modal-body {
+  padding: 20px;
+}
+.modal-body h1 {
+  text-align: center;
+  display: block;
+  font-size: 1.5rem;
+  font-weight: normal;
+  color: #c24621;
+}
+.modal-body p {
+  text-align: center;
+  color: #c24621;
+}
+
+.modal-buttons {
+  display: flex;
+  flex-flow: row nowrap;
+  padding: 10px;
+}
+.modal-buttons > button {
+  flex: 1 1 50px;
+  margin: 0 6px;
 }
