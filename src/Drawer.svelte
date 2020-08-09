@@ -2,6 +2,8 @@
 import { state, spendCredits, creditRegister, creditRegisterTotal, resetConfirmVisible } from './stores'
 import HistoryControls from './HistoryControls.svelte'
 import ResetControls from './ResetControls.svelte'
+import TerraformRank from './TerraformRank.svelte'
+import Generation from './Generation.svelte'
 
 // item: {type, amount} => "+/- amount"
 const itemQuantityFormat = ({ amount }) =>
@@ -43,72 +45,84 @@ const commitSpendCredits = () => { // empty creditRegister
 
 <div class="action-buttons">
   <ResetControls />
+  <Generation />
 </div>
 
-{#if !$spendCredits}
-  <div class="switch-mode-button">
-    <button class="button-switch" on:click={ enableSpendCredits }>Enter Spend Mode</button>
-  </div>
+<TerraformRank />
 
-  {#if !$resetConfirmVisible}
-    <HistoryControls />
-  {/if}
+{#if !$spendCredits}
+  <div class="normal-mode">
+    <div class="switch-mode-button">
+      <button class="button-switch" on:click={ enableSpendCredits }>Enter Spend Mode</button>
+    </div>
+
+    {#if !$resetConfirmVisible}
+      <HistoryControls />
+    {/if}
+  </div>
 
 {/if}
 
 {#if $spendCredits}
+
+<div class="spend-mode">
   <div class="exit-spend-mode-button">
     <button class="button-exit" on:click={ disableSpendCredits }>Exit Spend Mode</button>
-  </div>
-{/if}
-
-<div class="grid-summary-container">
-  <div class="grid-summary">
-    <ul class="grid-table">
-      {#each $creditRegister as item}
-        <li class="grid-table-row">
-          <div class="grid-table-resource">
-            <div class="grid-table-quantity">
-              {itemQuantityFormat(item)}
-            </div>
-            <div class="counter-label spend spend-{item.type}">
-              <span>{item.type}</span>
-            </div>
-            {#if itemQuantityConvertedFormat(item)}
-              <div style="border: 1px solid red;" class="grid-table-mega-credits">
-                {itemQuantityConvertedFormat(item)} <span class="mini-counter-label"></span>
-              </div>
-            {/if}
-          </div>
-        </li>
-      {/each}
-    </ul>
-
-    {#if $spendCredits && $creditRegister.length}
-      <div class="grid-table-row grid-table-summary">
-        <div class="grid-table-resource">
-          <div class="grid-table-quantity">
-            {$creditRegisterTotal}
-          </div>
-          <div class="counter-label spend spend-MCreditS">
-            <span>MegaCredits</span>
-          </div>
-          <div class="grid-table-mega-credits">
-            M€ Value
-          </div>
-        </div>
-      </div>
-    {/if}
-
   </div>
 
   {#if $spendCredits && !$creditRegister.length}
     <p class="placeholder-text">Use the counters to plan your move, then click Buy to initate all actions.</p>
   {/if}
 
-  <div class="grid-actions">
-  {#if $spendCredits && $creditRegister.length}
-    <button class="button-buy" on:click={ commitSpendCredits }>Buy</button>
-  {/if}
+
+  <div class="grid-summary-container">
+    <div class="grid-summary">
+      <ul class="grid-table">
+        {#each $creditRegister as item}
+          <li class="grid-table-row">
+            <div class="grid-table-resource">
+              <div class="grid-table-quantity">
+                {itemQuantityFormat(item)}
+              </div>
+              <div class="counter-label spend spend-{item.type}">
+                <span>{item.type}</span>
+              </div>
+            </div>
+            {#if itemQuantityConvertedFormat(item)}
+              <div class="grid-table-mega-credits">
+                {itemQuantityConvertedFormat(item)} <span class="mini-counter-label"></span>
+              </div>
+            {/if}
+          </li>
+        {/each}
+      </ul>
+
+      {#if $spendCredits && $creditRegister.length}
+        <div class="grid-table-row grid-table-summary">
+          <div class="grid-table-resource">
+            <div class="grid-table-quantity">
+              {$creditRegisterTotal}
+            </div>
+            <div class="counter-label spend spend-MCreditS">
+              <span>MegaCredits</span>
+            </div>
+          </div>
+          <div class="grid-table-mega-credits">
+            Value
+          </div>
+        </div>
+      {/if}
+
+    </div>
+
+    <div class="grid-actions">
+      {#if $spendCredits && $creditRegister.length}
+        <button class="button-buy" on:click={ commitSpendCredits }>Buy</button>
+      {/if}
+    </div>
+
   </div>
 </div>
+
+{/if}
+

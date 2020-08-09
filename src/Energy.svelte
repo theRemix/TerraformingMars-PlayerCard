@@ -70,6 +70,7 @@ const incP = () => {
     <div class="grid-area">
       <div class="counter-buttons">
         <div class="counter-buttons-resources">
+          <div class="button-spacer"></div>
           <button on:click={ dec1 } class="counter-button-resource minus">-1</button>
           <div class="counter-button-resource counter-button-resource-placeholder"></div>
         </div>
@@ -89,6 +90,7 @@ const incP = () => {
       </div>
       <div class="counter-buttons">
         <div class="counter-buttons-resources">
+          <div class="button-spacer"></div>
           <button on:click={ inc1 } class="counter-button-resource plus">+1</button>
           <div class="counter-button-resource counter-button-resource-placeholder"></div>
         </div>

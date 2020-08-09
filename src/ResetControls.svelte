@@ -13,6 +13,16 @@ const resetBoard = () => {
   <!-- Disable if in Spend Mode -->
   <button class="button-reset" on:click={ showConfirm }>☰</button>
 {:else}
-  <button on:click={ hideConfirm }>Cancel</button>
-  <button on:click={ resetBoard }>Confirm</button>
+  <div class="modal-bg">
+    <div class="modal">
+      <div class="modal-body">
+        <h1>Are you sure?</h1>
+        <p>All game points will be reset to default values.</p>
+      </div>
+      <div class="modal-buttons">
+        <button class="button-cancel" on:click={ hideConfirm }>Cancel</button>
+        <button class="button-confirm" on:click={ resetBoard }>Confirm</button>
+      </div>
+    </div>
+  </div>
 {/if}

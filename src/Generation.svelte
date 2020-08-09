@@ -25,29 +25,10 @@ const productionPhase = () => {
 
 </script>
 
-<div class="grid-area-container grid-area-container-generation">
-  <div class="grid-area-resources grid-area-generation">
-    <div class="grid-area">
-      <div class="counter-buttons">
-        <div class="counter-buttons-resources">
-          <div class="counter-button-resource counter-button-resource-placeholder"></div>
-          <div class="counter-button-resource counter-button-resource-placeholder"></div>
-        </div>
-      </div>
-      <div class="counter">
-        <div class="counter-count">
-          { $state.Generation }
-        </div>
-        <div class="counter-label">
-          <span>Generation</span>
-        </div>
-      </div>
-      <div class="counter-buttons">
-        <div class="counter-buttons-resources">
-          <button class="counter-button-resource" disabled={$spendCredits} on:click={ productionPhase }>↑</button>
-          <div class="counter-button-resource counter-button-resource-placeholder"></div>
-        </div>
-      </div>
-    </div>
+
+<div class="generation">
+  <div class="generation-count">
+    { $state.Generation }
   </div>
+  <button class="button-generation" disabled={$spendCredits} on:click={ productionPhase }>↑</button>
 </div>

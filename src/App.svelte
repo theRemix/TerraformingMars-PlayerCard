@@ -1,7 +1,5 @@
 <script>
   import Drawer from './Drawer.svelte'
-  import TerraformRank from './TerraformRank.svelte'
-  import Generation from './Generation.svelte'
   import MegaCredits from './MegaCredits.svelte'
   import Steel from './Steel.svelte'
   import Titanium from './Titanium.svelte'
@@ -18,16 +16,6 @@
     </div>
     <div class="column medium-9 main-column">
       <div class="main">
-        <div class="main-header">
-          <div class="row">
-            <div class="column medium-6">
-              <TerraformRank />
-            </div>
-            <div class="column medium-6">
-              <Generation />
-            </div>
-          </div>
-        </div>
         <div class="main-row">
           <div class="row">
             <div class="column medium-4">
