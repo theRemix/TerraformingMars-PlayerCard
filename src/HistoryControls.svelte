@@ -47,10 +47,6 @@ const redo = () => {
 </script>
 
 <div class="undo-redo-buttons">
-  <button class="button-undo" on:click={ undo }>
-    ↺
-  </button>
-  <button class="button-redo" on:click={ redo }>
-    ↻
-  </button>
+  <button class="button-undo" on:click={ undo }></button>
+  <button class="button-redo" on:click={ redo }></button>
 </div>

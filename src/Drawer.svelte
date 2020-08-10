@@ -43,28 +43,26 @@ const commitSpendCredits = () => { // empty creditRegister
 
 </script>
 
-<div class="action-buttons">
-  <ResetControls />
-  <Generation />
-</div>
-
 <TerraformRank />
 
 {#if !$spendCredits}
   <div class="normal-mode">
     <div class="switch-mode-button">
-      <button class="button-switch" on:click={ enableSpendCredits }>Enter Spend Mode</button>
+      <button class="button-switch" on:click={ enableSpendCredits }>Enter Buy Mode</button>
     </div>
 
     {#if !$resetConfirmVisible}
       <HistoryControls />
     {/if}
   </div>
-
+  
+  <div class="action-buttons">
+    <ResetControls />
+    <Generation />
+  </div>
 {/if}
 
 {#if $spendCredits}
-
 <div class="spend-mode">
   <div class="exit-spend-mode-button">
     <button class="button-exit" on:click={ disableSpendCredits }>Cancel</button>
@@ -76,12 +74,27 @@ const commitSpendCredits = () => { // empty creditRegister
 
 
   <div class="grid-summary-container">
+    {#if $spendCredits && $creditRegister.length}
+      <div class="grid-mega-credits-total">
+        <div class="grid-table-resource">
+          <div class="grid-table-quantity">
+            {$creditRegisterTotal}
+          </div>
+          <div class="counter-label spend spend-MCreditS">
+            <span>MegaCredits</span>
+          </div>
+        </div>
+        <div class="grid-table-mega-credits">
+          value
+        </div>
+      </div>
+    {/if}
     <div class="grid-summary">
       <ul class="grid-table">
         {#each $creditRegister as item}
           <li class="grid-table-row">
             <div class="grid-table-resource">
-              <div class="grid-table-quantity">
+              <div class="grid-table-quantity quantity-type-{item.type}">
                 {itemQuantityFormat(item)}
               </div>
               <div class="counter-label spend spend-{item.type}">
@@ -97,30 +110,13 @@ const commitSpendCredits = () => { // empty creditRegister
         {/each}
       </ul>
 
-      {#if $spendCredits && $creditRegister.length}
-        <div class="grid-table-row grid-table-summary">
-          <div class="grid-table-resource">
-            <div class="grid-table-quantity">
-              {$creditRegisterTotal}
-            </div>
-            <div class="counter-label spend spend-MCreditS">
-              <span>MegaCredits</span>
-            </div>
-          </div>
-          <div class="grid-table-mega-credits">
-            Value
-          </div>
-        </div>
-      {/if}
+    </div>  
+  </div>
 
-    </div>
-
-    <div class="grid-actions">
-      {#if $spendCredits && $creditRegister.length}
-        <button class="button-buy" on:click={ commitSpendCredits }>Buy</button>
-      {/if}
-    </div>
-
+  <div class="grid-actions">
+    {#if $spendCredits && $creditRegister.length}
+      <button class="button-buy" on:click={ commitSpendCredits }>Buy</button>
+    {/if}
   </div>
 </div>
 

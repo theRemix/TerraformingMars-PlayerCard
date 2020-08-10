@@ -121,14 +121,8 @@ button:focus {
   background-position: center center;
   background-repeat: no-repeat;
   position: relative;
-  width: 3vh;
-  height: 3vh;
-}
-@media only screen and (orientation: portrait) {
-  .counter-label {
-    width: 3vw;
-    height: 3vw;
-  }
+  width: 5vh;
+  height: 5vh;
 }
 .counter-label span {
   display: none;
@@ -140,7 +134,7 @@ button:focus {
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
-  margin: 0 3px 4px;
+  margin: 0 0 4px 2px;
 }
 
 .counter-count {
@@ -149,18 +143,8 @@ button:focus {
   padding: 0 4px;
   font-size: 6vh;
 }
-@media only screen and (orientation: portrait) {
-  .counter-count {
-    font-size: 6vw;
-  }
-}
 .grid-area-resources .counter-count {
   font-size: 7vh;
-}
-@media only screen and (orientation: portrait) {
-  .grid-area-resources .counter-count {
-    font-size: 7vw;
-  }
 }
 
 .counter-change {
@@ -170,26 +154,11 @@ button:focus {
   font-weight: normal;
   letter-spacing: 1px;
 }
-@media only screen and (orientation: portrait) {
-  .counter-change {
-    font-size: 3.5vw;
-  }
-}
 .grid-area-income .counter-change {
   margin-top: -9vh;
 }
-@media only screen and (orientation: portrait) {
-  .grid-area-income .counter-change {
-    margin-top: -9vw;
-  }
-}
 .grid-area-resources .counter-change {
   margin-top: -14vh;
-}
-@media only screen and (orientation: portrait) {
-  .grid-area-resources .counter-change {
-    margin-top: -17vw;
-  }
 }
 
 .counter-buttons {
@@ -215,17 +184,6 @@ button:focus {
   font-weight: normal;
   letter-spacing: 1px;
 }
-@media only screen and (orientation: portrait) {
-  .counter-button-resource {
-    font-size: 5vw;
-  }
-}
-@media only screen and (orientation: portrait) and (min-width: 400px) {
-  .counter-button-resource {
-    font-size: 3.5vw;
-  }
-}
-
 .grid-area-resources .counter-button-resource {
   flex: 6 1 41px;
 }
@@ -389,11 +347,6 @@ div.counter-button-resource-placeholder {
   line-height: 1;
   font-size: 2.5vh;
 }
-@media only screen and (orientation: portrait) {
-  .grid-area-resources.grid-area-TR .counter-label span {
-    font-size: 2.5vw;
-  }
-}
 .grid-area-resources.grid-area-TR .counter-button-resource {
   color: #DE7629;
 }
@@ -486,79 +439,80 @@ div.counter-button-resource-placeholder {
   flex: 1 0 75%;
   max-height: 100vh;
 }
-@media only screen and (orientation: portrait) {
-  .column.main-column {
-    max-height: 100vw;
-  }
-}
 
 .column.summary-column {
   padding: 0;
   margin: 6px 0 6px 6px;
-  flex: 0 1 130px;
-  max-width: 200px;
+  flex: 0 1 175px;
+  max-width: 175px;
   display: flex;
   flex-flow: column nowrap;
   max-height: 100vh;
-}
-@media only screen and (orientation: portrait) {
-  .column.summary-column {
-    max-height: 100vw;
-  }
 }
 
 .action-buttons {
   flex: 0 0 auto;
   width: 100%;
   display: flex;
+  flex-flow: row nowrap;
+  padding: 0 6px 6px 6px;
 }
 
-.generation {
+.button-generation {
   flex: 1 1 50px;
   display: flex;
   flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
-  background-color: #FFFFFF;
-  padding: 4px 0;
+  justify-content: stretch;
+  align-items: stretch;
+  color: #6d787d;
+  padding: 1vh 0;
+  border: 1px solid #495154;
+  border-radius: 3px;
 }
-.generation .button-generation {
+.button-generation:focus, .button-generation:hover {
+  border-color: #cbd0d1;
+}
+.button-generation:focus .generation-text,
+.button-generation:focus .generation-label, .button-generation:hover .generation-text,
+.button-generation:hover .generation-label {
+  color: #cbd0d1;
+}
+
+.button-generation:focus .generation-text span,
+.button-generation:hover .generation-text span{
+  background-image: url("assets/arrow-up-light.svg");
+}
+
+.button-generation .generation-text {
+  padding: 1vh 0 0;
   flex: 0 0 auto;
+  width: 100%;
+  background-color: transparent;
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
-  align-items: center;
-  background-color: #FFFFFF;
+  align-items: stretch;
   line-height: 1;
   font-weight: bold;
-  color: #313739;
+  color: #6d787d;
   font-size: 7vh;
 }
-@media only screen and (orientation: portrait) {
-  .generation .button-generation {
-    font-size: 7vw;
-  }
+.button-generation .generation-text span {
+  flex: 0 0 2vh;
+  background-image: url("assets/arrow-up.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  margin-left: 0.5vh;
 }
-.generation .button-generation:focus, .generation .button-generation:hover {
-  background-color: #e6e8e9;
-}
-.generation .button-generation span {
-  padding: 0 5px 2px;
-  font-size: 0.7em;
-}
-.generation .generation-label {
+.button-generation .generation-label {
+  flex: 0 0 auto;
   font-weight: normal;
   color: #6d787d;
-  font-size: 2vh;
-}
-@media only screen and (orientation: portrait) {
-  .generation .generation-label {
-    font-size: 2vw;
-  }
-}
-
-.sidebar-tr {
-  margin-top: 6px;
+  font-size: 3vh;
+  text-align: center;
+  width: 100%;
+  padding-bottom: 0.5vh;
 }
 
 .normal-mode {
@@ -589,11 +543,6 @@ div.counter-button-resource-placeholder {
   margin-top: 6px;
   background-color: #FFFFFF;
 }
-@media only screen and (orientation: portrait) {
-  .spend-mode {
-    margin-bottom: 12px;
-  }
-}
 
 .exit-spend-mode-button {
   flex: 0 0 auto;
@@ -607,12 +556,49 @@ div.counter-button-resource-placeholder {
   flex: 0 0 auto;
   width: 100%;
   display: flex;
-  flex-flow: column nowrap;
   margin-top: 6px;
+  flex-flow: row nowrap;
+  align-items: flex-start;
+}
+
+.grid-mega-credits-total {
+  flex: 0 0 50px;
+  background-color: #fceed7;
+  border-radius: 3px;
+  padding: 4px 0;
+  order: 2;
+  margin-right: 6px;
+  margin-left: 3px;
+}
+.grid-mega-credits-total .grid-table-resource {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+.grid-mega-credits-total .grid-table-resource .counter-label.spend {
+  flex: 0 0 10px;
+  height: 10px;
+  margin: 0;
+}
+.grid-mega-credits-total .grid-table-resource .grid-table-quantity {
+  flex: 0 0 auto;
+  padding-right: 2px;
+  color: #f1a830;
+}
+.grid-mega-credits-total .grid-table-mega-credits {
+  font-weight: normal;
+  font-size: 0.7em;
+  display: flex;
+  justify-content: center;
+  padding-left: 0;
+  color: #f1a830;
+  margin-top: -2px;
 }
 
 .grid-summary {
-  flex: 0 0 auto;
+  flex: 1 0 50px;
+  order: 1;
   display: flex;
   flex-flow: column nowrap;
 }
@@ -620,7 +606,7 @@ div.counter-button-resource-placeholder {
 .grid-table {
   margin: auto 0;
   flex: 0 0 auto;
-  padding: 6px;
+  padding: 0 0 0 6px;
 }
 
 .grid-table-row {
@@ -628,7 +614,7 @@ div.counter-button-resource-placeholder {
   flex-flow: row nowrap;
 }
 .grid-table-row + .grid-table-row {
-  margin-top: 10px;
+  margin-top: 4px;
 }
 
 .grid-table-resource {
@@ -637,6 +623,7 @@ div.counter-button-resource-placeholder {
   flex-flow: row nowrap;
   justify-content: flex-end;
   align-items: center;
+  padding-right: 2px;
 }
 .grid-table-resource .grid-table-quantity {
   flex: 1 1 50%;
@@ -644,15 +631,64 @@ div.counter-button-resource-placeholder {
   flex-flow: row nowrap;
   justify-content: flex-end;
   align-items: center;
-  font-size: 1.15rem;
+  font-size: 5vh;
   font-weight: bold;
+  padding-right: 3px;
+  letter-spacing: 1px;
 }
-.grid-table-resource .spend {
-  margin: 0 5px 0 5px;
-  flex: 0 0 26px;
+.grid-table-resource .grid-table-quantity.quantity-type-MCreditS, .grid-table-resource .grid-table-quantity.quantity-type-MCreditP {
+  color: #f1a830;
+}
+.grid-table-resource .grid-table-quantity.quantity-type-SteelS, .grid-table-resource .grid-table-quantity.quantity-type-SteelP {
+  color: #745339;
+}
+.grid-table-resource .grid-table-quantity.quantity-type-TitaniumS, .grid-table-resource .grid-table-quantity.quantity-type-TitaniumP {
+  color: #6d787d;
+}
+.grid-table-resource .grid-table-quantity.quantity-type-PlantS, .grid-table-resource .grid-table-quantity.quantity-type-PlantP {
+  color: #749838;
+}
+.grid-table-resource .grid-table-quantity.quantity-type-EnergyS, .grid-table-resource .grid-table-quantity.quantity-type-EnergyP {
+  color: #682A7E;
+}
+.grid-table-resource .grid-table-quantity.quantity-type-HeatS, .grid-table-resource .grid-table-quantity.quantity-type-HeatP {
+  color: #c24621;
+}
+.grid-table-resource .grid-table-quantity.quantity-type-TR {
+  color: #DE7629;
 }
 .grid-table-resource .spend span {
   display: none;
+}
+
+.grid-table-resource .spend-TR {
+  background-color: #DE7629;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1px;
+}
+.grid-table-resource .spend-TR span {
+  display: block;
+  font-weight: bold;
+  color: #f2cbae;
+  font-size: 0.5em;
+  letter-spacing: 1px;
+  text-align: center;
+  margin: auto;
+}
+
+.spend-MCreditS,
+.spend-SteelS,
+.spend-TitaniumS,
+.spend-PlantS,
+.spend-EnergyS,
+.spend-HeatS,
+.spend-TR {
+  height: 16px;
+  flex: 0 0 16px;
+  margin: 0 3px;
 }
 
 .spend-MCreditP,
@@ -661,9 +697,36 @@ div.counter-button-resource-placeholder {
 .spend-PlantP,
 .spend-EnergyP,
 .spend-HeatP {
-  border: 4px solid #cbd0d1;
-  height: 26px;
+  background-color: #FFFFFF;
+  border: 1px solid transparent;
+  height: 22px;
+  flex: 0 0 22px;
   border-radius: 3px;
+  background-size: 16px auto;
+}
+
+.spend-MCreditP {
+  border-color: #f1a830;
+}
+
+.spend-SteelP {
+  border-color: #745339;
+}
+
+.spend-TitaniumP {
+  border-color: #6d787d;
+}
+
+.spend-PlantP {
+  border-color: #749838;
+}
+
+.spend-EnergyP {
+  border-color: #682A7E;
+}
+
+.spend-HeatP {
+  border-color: #c24621;
 }
 
 .grid-table-mega-credits {
@@ -673,16 +736,12 @@ div.counter-button-resource-placeholder {
   justify-content: flex-start;
   align-items: center;
   font-size: 0.8em;
+  color: #f1a830;
 }
 .grid-table-mega-credits span {
   font-size: 1.2em;
   transform: translateY(2px);
-}
-
-.grid-table-summary {
-  margin: 0 6px 0;
-  border-top: 1px solid #e6e8e9;
-  padding: 6px 0;
+  font-weight: normal;
 }
 
 .grid-actions {
@@ -698,29 +757,30 @@ div.counter-button-resource-placeholder {
 .button-undo {
   flex: 1 1 auto;
   width: auto;
-  font-size: 1.1rem;
-  padding: 20px 0;
+  height: 41px;
   background-color: #6d787d;
   color: #313739;
-  background-size: auto 70%;
+  background-size: auto 50%;
   background-repeat: no-repeat;
   background-position: center center;
 }
 .button-redo:hover,
 .button-undo:hover {
-  background-color: #555e62;
+  background-color: #cbd0d1;
 }
 
 .button-undo {
   border-right: none;
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
+  background-image: url("assets/arrow-undo.svg");
 }
 
 .button-redo {
   border-left: 1px solid #313739;
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
+  background-image: url("assets/arrow-redo.svg");
 }
 
 .button-cancel,
@@ -731,7 +791,7 @@ div.counter-button-resource-placeholder {
   flex: 1 0 auto;
   width: 100%;
   padding: 10px;
-  font-size: 0.9rem;
+  font-size: 4vh;
   text-align: center;
 }
 
@@ -739,16 +799,18 @@ div.counter-button-resource-placeholder {
   color: #616b6f;
   border: 1px solid #495154;
   border-radius: 3px;
+  padding: 10px 0;
 }
 .button-switch:hover {
-  border-color: #6d787d;
-  color: #869296;
+  border-color: #cbd0d1;
+  color: #cbd0d1;
 }
 
 .button-reset {
-  color: #616b6f;
-  flex: 0 1 41px;
-  padding-right: 6px;
+  color: #6d787d;
+  flex: 0 1 50px;
+  padding-right: 12px;
+  font-size: 5vh;
 }
 .button-reset:hover {
   color: #cbd0d1;
@@ -795,46 +857,42 @@ div.counter-button-resource-placeholder {
 .spend-MCreditP,
 .spend-MCreditS,
 .grid-area-MCreditS .counter-label {
-  background-image: url("https://placehold.it/50x50/F8B443/FFFFFF");
+  background-image: url("assets/mega-credits.svg");
 }
 
 .spend-SteelP,
 .spend-SteelS,
 .grid-area-SteelS .counter-label {
-  background-image: url("https://placehold.it/50x50/745339/FFFFFF");
-}
-
-.spend-TR {
-  background-image: url("https://placehold.it/50x50/DE7629/FFFFFF");
+  background-image: url("assets/steel.svg");
 }
 
 .spend-TitaniumP,
 .spend-TitaniumS,
 .grid-area-TitaniumS .counter-label {
-  background-image: url("https://placehold.it/50x50/6d787d/FFFFFF");
+  background-image: url("assets/titanium.svg");
 }
 
 .spend-PlantP,
 .spend-PlantS,
 .grid-area-PlantS .counter-label {
-  background-image: url("https://placehold.it/50x50/749838/FFFFFF");
+  background-image: url("assets/plants.svg");
 }
 
 .spend-EnergyP,
 .spend-EnergyS,
 .grid-area-EnergyS .counter-label {
-  background-image: url("https://placehold.it/50x50/682A7E/FFFFFF");
+  background-image: url("assets/energy.svg");
 }
 
 .spend-HeatP,
 .spend-HeatS,
 .grid-area-HeatS .counter-label {
-  background-image: url("https://placehold.it/50x50/C25621/FFFFFF");
+  background-image: url("assets/heat.svg");
 }
 
 p.placeholder-text {
   padding: 10px 10px;
-  font-size: 0.9em;
+  font-size: 4vh;
   color: #a2abae;
   line-height: 1.4;
   margin: auto 0;
@@ -869,30 +927,16 @@ p.placeholder-text {
   flex: 0 0 auto;
   margin-left: auto;
   margin-right: auto;
-  width: 5vh;
-  height: 5vh;
-}
-@media only screen and (orientation: portrait) {
-  .counter-button-resource-heat span.counter-button-heat-graphic,
-  .counter-button-resource-heat span.counter-button-plants-graphic,
-  .counter-button-resource-heat span.counter-button-energy-graphic,
-  .counter-button-resource-plants span.counter-button-heat-graphic,
-  .counter-button-resource-plants span.counter-button-plants-graphic,
-  .counter-button-resource-plants span.counter-button-energy-graphic,
-  .counter-button-resource-energy span.counter-button-heat-graphic,
-  .counter-button-resource-energy span.counter-button-plants-graphic,
-  .counter-button-resource-energy span.counter-button-energy-graphic {
-    width: 5vw;
-    height: 5vw;
-  }
+  width: 6vh;
+  height: 6vh;
 }
 
 .counter-button-resource-plants span.counter-button-plants-graphic {
-  background-image: url("https://placehold.it/40x40/");
+  background-image: url("assets/plant-tile.svg");
 }
 
 .counter-button-resource-heat span.counter-button-heat-graphic {
-  background-image: url("https://placehold.it/40x40/");
+  background-image: url("assets/temperature.svg");
 }
 
 .counter-button-resource-energy {
@@ -918,12 +962,6 @@ p.placeholder-text {
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
-}
-@media only screen and (orientation: portrait) {
-  .modal-bg {
-    width: 100vh;
-    height: 100vw;
-  }
 }
 
 .modal {

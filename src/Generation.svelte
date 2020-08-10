@@ -25,10 +25,11 @@ const productionPhase = () => {
 </script>
 
 
-<div class="generation">
-  <button class="button-generation" disabled={$spendCredits} on:click={ productionPhase }>
+<button class="button-generation" disabled={$spendCredits} on:click={ productionPhase }>
+  <div class="generation-text">
     { $state.Generation }
-    <span>↑</span>
-  </button>
+    <span></span>
+  </div>
+
   <div class="generation-label">Generation</div>
-</div>
+</button>
