@@ -8,7 +8,9 @@
   import Heat from './Heat.svelte'
 </script>
 
-
+<div class="flip-your-phone">
+  Please turn your device to landscape orientation.
+</div>
 <div class="grid">
   <div class="row">
     <div class="column medium-3 summary-column">
