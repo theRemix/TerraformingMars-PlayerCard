@@ -72,7 +72,12 @@ const incP = () => {
         <div class="counter-buttons-resources">
           <div class="button-spacer"></div>
           <button on:click={ dec1 } class="counter-button-resource minus">-1</button>
-          <div class="counter-button-resource counter-button-resource-placeholder"></div>
+          <button class="counter-button-resource counter-button-resource-energy">
+            <div class="counter-button-inner">
+              <span class="counter-button-energy-graphic"></span>
+              <span class="counter-button-energy-amount">0</span>
+            </div>
+          </button>
         </div>
       </div>
       <div class="counter">

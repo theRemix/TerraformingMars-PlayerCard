@@ -67,7 +67,7 @@ const commitSpendCredits = () => { // empty creditRegister
 
 <div class="spend-mode">
   <div class="exit-spend-mode-button">
-    <button class="button-exit" on:click={ disableSpendCredits }>Exit Spend Mode</button>
+    <button class="button-exit" on:click={ disableSpendCredits }>Cancel</button>
   </div>
 
   {#if $spendCredits && !$creditRegister.length}
