@@ -699,9 +699,12 @@ div.counter-button-resource-placeholder {
   flex: 1 1 auto;
   width: auto;
   font-size: 1.1rem;
-  padding: 8px 0;
+  padding: 20px 0;
   background-color: #6d787d;
   color: #313739;
+  background-size: auto 70%;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 .button-redo:hover,
 .button-undo:hover {
@@ -957,12 +960,39 @@ p.placeholder-text {
 }
 
 @media only screen and (orientation: portrait) {
-  html {
-    transform: rotate(-90deg);
-    transform-origin: left top;
-    width: 100vh;
-    position: absolute;
-    top: 100%;
+  body {
+    position: fixed;
+    top: 0;
+    bottom: 0;
     left: 0;
+    right: 0;
+    background-color: #313739;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media only screen and (orientation: portrait) {
+  .grid {
+    display: none;
+  }
+}
+
+.flip-your-phone {
+  display: none;
+}
+@media only screen and (orientation: portrait) {
+  .flip-your-phone {
+    display: block;
+    flex: 0 0 auto;
+    padding: 0 30px;
+    font-family: sans-serif;
+    position: absolute;
+    color: #6d787d;
+    text-align: center;
+    margin: auto;
+    line-height: 1.4;
   }
 }
