@@ -1,7 +1,38 @@
 <script>
-import { state, creditRegister, spendCredits } from './stores'
+import { state, changeCounters, creditRegister, spendCredits } from './stores'
+import { updateCounterChange } from './utils'
 
 const productionPhase = () => {
+
+  // change counter animation
+  changeCounters.update(cc => ({
+    ...cc,
+    HeatS: updateCounterChange(
+      cc.HeatS,
+      () => $state.EnergyS + $state.HeatP,
+    ),
+    MCreditS: updateCounterChange(
+      cc.MCreditS,
+      () => $state.TR + $state.MCreditP,
+    ),
+    SteelS: updateCounterChange(
+      cc.SteelS,
+      () => $state.SteelP,
+    ),
+    TitaniumS: updateCounterChange(
+      cc.TitaniumS,
+      () => $state.TitaniumP,
+    ),
+    PlantS: updateCounterChange(
+      cc.PlantS,
+      () => $state.PlantP,
+    ),
+    EnergyS: updateCounterChange(
+      cc.EnergyS,
+      () => $state.EnergyP - $state.EnergyS,
+    ),
+  }))
+
   state.update(state => ({
     ...state,
 
