@@ -20,16 +20,36 @@ const productionPhase = () => {
     PlantS: state.PlantS + state.PlantP,
     EnergyS: state.EnergyP,
   }))
+
+  hideConfirm()
 }
 
+let productionConfirmVisible = false
+const showConfirm = () => productionConfirmVisible = true
+const hideConfirm = () => productionConfirmVisible = false
 </script>
 
 
-<button class="button-generation" disabled={$spendCredits} on:click={ productionPhase }>
-  <div class="generation-text">
-    { $state.Generation }
-    <span></span>
-  </div>
+{#if !productionConfirmVisible}
+  <button class="button-generation" disabled={$spendCredits} on:click={ showConfirm }>
+    <div class="generation-text">
+      { $state.Generation }
+      <span></span>
+    </div>
 
-  <div class="generation-label">Generation</div>
-</button>
+    <div class="generation-label">Generation</div>
+  </button>
+{:else}
+  <div class="modal-bg">
+    <div class="modal">
+      <div class="modal-body">
+        <h1>Advance Generation<br />{$state.Generation} → {$state.Generation + 1}</h1>
+        <p>Produce income and resources based on TR?</p>
+      </div>
+      <div class="modal-buttons">
+        <button class="button-cancel" on:click={ hideConfirm }>Cancel</button>
+        <button class="button-confirm" on:click={ productionPhase }>Confirm</button>
+      </div>
+    </div>
+  </div>
+{/if}
