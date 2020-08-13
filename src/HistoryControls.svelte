@@ -1,6 +1,7 @@
 <script>
 import { onDestroy } from 'svelte'
 import { history, state } from './stores'
+import { resetCounterChange } from './utils'
 
 const undo = () => {
   const step = $history
@@ -18,6 +19,9 @@ const undo = () => {
 
   // overwrite history
   history.set(prevHistory)
+
+  // reset counterChange, fixes "stuck" counters on mobile
+  resetCounterChange()
 }
 
 const redo = () => {
@@ -43,6 +47,8 @@ const redo = () => {
   // overwrite history
   history.set(prevHistory)
 
+  // reset counterChange, fixes "stuck" counters on mobile
+  resetCounterChange()
 }
 </script>
 
