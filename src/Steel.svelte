@@ -1,59 +1,26 @@
 <script>
 import { fly, fade } from 'svelte/transition'
-import { state, spendCredits, creditRegister, queueSpend } from './stores'
-import { createChangeCounter, updateCounterChange, counterChangeInAnim } from './utils'
+import { state, changeCounters, spendCredits, creditRegister, queueSpend } from './stores'
+import { counterChangeInAnim } from './utils'
 
-let counterSChange = createChangeCounter('SteelS')
-let counterPChange = createChangeCounter('SteelP')
-
-const dec5 = () => {
+const dec5 = () =>
   queueSpend($spendCredits, $creditRegister, 'SteelS', $state, (n => n - 5))
-  counterSChange = updateCounterChange(
-    counterSChange,
-    (n => n - 5),
-    (reset) => counterSChange = reset
-  )
-}
-const dec1 = () => {
+
+const dec1 = () =>
   queueSpend($spendCredits, $creditRegister, 'SteelS', $state, (n => n - 1))
-  counterSChange = updateCounterChange(
-    counterSChange,
-    (n => n - 1),
-    (reset) => counterSChange = reset
-  )
-}
-const inc1 = () => {
+
+const inc1 = () =>
   queueSpend($spendCredits, $creditRegister, 'SteelS', $state, (n => n + 1))
-  counterSChange = updateCounterChange(
-    counterSChange,
-    (n => n + 1),
-    (reset) => counterSChange = reset
-  )
-}
-const inc5 = () => {
+
+const inc5 = () =>
   queueSpend($spendCredits, $creditRegister, 'SteelS', $state, (n => n + 5))
-  counterSChange = updateCounterChange(
-    counterSChange,
-    (n => n + 5),
-    (reset) => counterSChange = reset
-  )
-}
-const decP = () => {
+
+const decP = () =>
   queueSpend($spendCredits, $creditRegister, 'SteelP', $state, (n => n - 1))
-  counterPChange = updateCounterChange(
-    counterPChange,
-    (n => n - 1),
-    (reset) => counterPChange = reset
-  )
-}
-const incP = () => {
+
+const incP = () =>
   queueSpend($spendCredits, $creditRegister, 'SteelP', $state, (n => n + 1))
-  counterPChange = updateCounterChange(
-    counterPChange,
-    (n => n + 1),
-    (reset) => counterPChange = reset
-  )
-}
+
 </script>
 
 <div class="grid-area-container grid-area-container">
@@ -74,9 +41,9 @@ const incP = () => {
         <div class="counter-label">
           <span>Steel</span>
         </div>
-        {#if counterSChange.text !== ''}
+        {#if $changeCounters.SteelS.text !== ''}
         <div class="counter-change" in:fly={counterChangeInAnim} out:fade>
-          { counterSChange.text }
+          { $changeCounters.SteelS.text }
         </div>
         {/if}
       </div>
@@ -101,9 +68,9 @@ const incP = () => {
         <div class="counter-count">
           { $state.SteelP }
         </div>
-        {#if counterPChange.text !== ''}
+        {#if $changeCounters.SteelP.text !== ''}
         <div class="counter-change" in:fly={counterChangeInAnim} out:fade>
-          { counterPChange.text }
+          { $changeCounters.SteelP.text }
         </div>
         {/if}
       </div>

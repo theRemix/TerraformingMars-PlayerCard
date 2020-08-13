@@ -1,4 +1,5 @@
 import { writable, derived } from 'svelte/store'
+import { createChangeCounter, updateCounterChange } from './utils'
 
 const initialState = {
   TR: 20,
@@ -19,6 +20,21 @@ const initialState = {
 export const state = writable({})
 export const resetState = () => state.set(initialState)
 export const resetConfirmVisible = writable(false)
+
+export const changeCounters = writable({
+  MCreditS: createChangeCounter('MCreditS'),
+  MCreditP: createChangeCounter('MCreditP'),
+  SteelS: createChangeCounter('SteelS'),
+  SteelP: createChangeCounter('SteelP'),
+  TitaniumS: createChangeCounter('TitaniumS'),
+  TitaniumP: createChangeCounter('TitaniumP'),
+  PlantS: createChangeCounter('PlantS'),
+  PlantP: createChangeCounter('PlantP'),
+  EnergyS: createChangeCounter('EnergyS'),
+  EnergyP: createChangeCounter('EnergyP'),
+  HeatS: createChangeCounter('HeatS'),
+  HeatP: createChangeCounter('HeatP'),
+})
 
 // ## SESSIONS ##
 if (Storage && localStorage.getItem('state')) {
@@ -113,6 +129,15 @@ export const queueSpend = (spendCredits, creditRegister$, counterType, state$, c
   state.update(() => ({
     ...state$,
     [counterType]: counterFn(state$[counterType])
+  }))
+
+  // change counter animation
+  changeCounters.update(cc => ({
+    ...cc,
+    [counterType]: updateCounterChange(
+      cc[counterType],
+      counterFn
+    )
   }))
 }
 

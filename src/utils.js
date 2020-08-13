@@ -1,16 +1,27 @@
+import { changeCounters } from './stores'
+
 const counterTimeouts = new Map()
 
+const resetChangeCounter = id =>
+  changeCounters.update(cc => ({
+    ...cc,
+    [id]: {
+      ...cc[id],
+      amount: 0,
+      text: ''
+    }
+  }))
+
 // counter: { id, amount, text }
-export const updateCounterChange = (counter, fn, resetCb) => {
+export const updateCounterChange = (counter, fn) => {
   if(counterTimeouts.has(counter.id)){
-    clearTimeout(counterTimeouts.get(counter.id)[1])
-    counterTimeouts.delete(counter.id)
+    clearTimeout(counterTimeouts.get(counter.id))
   }
 
-  counterTimeouts.set(counter.id, [resetCb, setTimeout(() => {
-    resetCb({ amount: 0, text: '' })
+  counterTimeouts.set(counter.id, setTimeout(() => {
+    resetChangeCounter(counter.id)
     counterTimeouts.delete(counter.id)
-  }, 3000)])
+  }, 3000))
 
   counter.amount = fn(counter.amount)
 
@@ -29,10 +40,10 @@ export const updateCounterChange = (counter, fn, resetCb) => {
 }
 
 export const resetCounterChange = () => {
-  for(let [key, [resetCb, timer]] of counterTimeouts){
-    resetCb({ amount: 0, text: '' })
+  for(let [id, timer] of counterTimeouts){
+    resetChangeCounter(id)
     clearTimeout(timer)
-    counterTimeouts.delete(key)
+    counterTimeouts.delete(id)
   }
 }
 

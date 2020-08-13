@@ -1,60 +1,25 @@
 <script>
 import { fly, fade } from 'svelte/transition'
-import { state, spendCredits, creditRegister, queueSpend } from './stores'
-import { createChangeCounter, updateCounterChange, counterChangeInAnim } from './utils'
+import { state, changeCounters, spendCredits, creditRegister, queueSpend } from './stores'
+import { counterChangeInAnim } from './utils'
 
-let counterSChange = createChangeCounter('MCreditS')
-let counterPChange = createChangeCounter('MCreditP')
-
-const dec5 = () => {
+const dec5 = () =>
   queueSpend($spendCredits, $creditRegister, 'MCreditS', $state, (n => n - 5))
-  counterSChange = updateCounterChange(
-    counterSChange,
-    (n => n - 5),
-    (reset) => counterSChange = reset
-  )
-}
-const dec1 = () => {
-  queueSpend($spendCredits, $creditRegister, 'MCreditS', $state, (n => n - 1))
-  counterSChange = updateCounterChange(
-    counterSChange,
-    (n => n - 1),
-    (reset) => counterSChange = reset
-  )
-}
-const inc1 = () => {
-  queueSpend($spendCredits, $creditRegister, 'MCreditS', $state, (n => n + 1))
-  counterSChange = updateCounterChange(
-    counterSChange,
-    (n => n + 1),
-    (reset) => counterSChange = reset
-  )
-}
-const inc5 = () => {
-  queueSpend($spendCredits, $creditRegister, 'MCreditS', $state, (n => n + 5))
-  counterSChange = updateCounterChange(
-    counterSChange,
-    (n => n + 5),
-    (reset) => counterSChange = reset
-  )
-}
-const decP = () => {
-  queueSpend($spendCredits, $creditRegister, 'MCreditP', $state, (n => n - 1))
-  counterPChange = updateCounterChange(
-    counterPChange,
-    (n => n - 1),
-    (reset) => counterPChange = reset
-  )
-}
-const incP = () => {
-  queueSpend($spendCredits, $creditRegister, 'MCreditP', $state, (n => n + 1))
-  counterPChange = updateCounterChange(
-    counterPChange,
-    (n => n + 1),
-    (reset) => counterPChange = reset
-  )
-}
 
+const dec1 = () =>
+  queueSpend($spendCredits, $creditRegister, 'MCreditS', $state, (n => n - 1))
+
+const inc1 = () =>
+  queueSpend($spendCredits, $creditRegister, 'MCreditS', $state, (n => n + 1))
+
+const inc5 = () =>
+  queueSpend($spendCredits, $creditRegister, 'MCreditS', $state, (n => n + 5))
+
+const decP = () =>
+  queueSpend($spendCredits, $creditRegister, 'MCreditP', $state, (n => n - 1))
+
+const incP = () =>
+  queueSpend($spendCredits, $creditRegister, 'MCreditP', $state, (n => n + 1))
 
 </script>
 
@@ -76,9 +41,9 @@ const incP = () => {
         <div class="counter-label">
           <span>M€</span>
         </div>
-        {#if counterSChange.text !== ''}
+        {#if $changeCounters.MCreditS.text !== ''}
         <div class="counter-change" in:fly={counterChangeInAnim} out:fade>
-          { counterSChange.text }
+          { $changeCounters.MCreditS.text }
         </div>
         {/if}
       </div>
@@ -103,9 +68,9 @@ const incP = () => {
         <div class="counter-count">
           { $state.MCreditP }
         </div>
-        {#if counterPChange.text !== ''}
+        {#if $changeCounters.MCreditP.text !== ''}
         <div class="counter-change" in:fly={counterChangeInAnim} out:fade>
-          { counterPChange.text }
+          { $changeCounters.MCreditP.text }
         </div>
         {/if}
       </div>

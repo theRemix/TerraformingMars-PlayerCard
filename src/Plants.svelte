@@ -1,51 +1,23 @@
 <script>
 import { fly, fade } from 'svelte/transition'
-import { state, spendCredits, creditRegister, queueSpend } from './stores'
-import { createChangeCounter, updateCounterChange, counterChangeInAnim } from './utils'
+import { state, changeCounters, spendCredits, creditRegister, queueSpend } from './stores'
+import { counterChangeInAnim } from './utils'
 
-let counterSChange = createChangeCounter('PlantS')
-let counterPChange = createChangeCounter('PlantP')
-
-const dec8 = () => {
+const dec8 = () =>
   queueSpend($spendCredits, $creditRegister, 'PlantS', $state, (n => n - 8))
-  counterSChange = updateCounterChange(
-    counterSChange,
-    (n => n - 8),
-    (reset) => counterSChange = reset
-  )
-}
-const dec1 = () => {
+
+const dec1 = () =>
   queueSpend($spendCredits, $creditRegister, 'PlantS', $state, (n => n - 1))
-  counterSChange = updateCounterChange(
-    counterSChange,
-    (n => n - 1),
-    (reset) => counterSChange = reset
-  )
-}
-const inc1 = () => {
+
+const inc1 = () =>
   queueSpend($spendCredits, $creditRegister, 'PlantS', $state, (n => n + 1))
-  counterSChange = updateCounterChange(
-    counterSChange,
-    (n => n + 1),
-    (reset) => counterSChange = reset
-  )
-}
-const decP = () => {
+
+const decP = () =>
   queueSpend($spendCredits, $creditRegister, 'PlantP', $state, (n => n - 1))
-  counterPChange = updateCounterChange(
-    counterPChange,
-    (n => n - 1),
-    (reset) => counterPChange = reset
-  )
-}
-const incP = () => {
+
+const incP = () =>
   queueSpend($spendCredits, $creditRegister, 'PlantP', $state, (n => n + 1))
-  counterPChange = updateCounterChange(
-    counterPChange,
-    (n => n + 1),
-    (reset) => counterPChange = reset
-  )
-}
+
 </script>
 
 <div class="grid-area-container grid-area-container">
@@ -60,9 +32,9 @@ const incP = () => {
         <div class="counter-count">
           { $state.PlantP }
         </div>
-        {#if counterPChange.text !== ''}
+        {#if $changeCounters.PlantP.text !== ''}
         <div class="counter-change" in:fly={counterChangeInAnim} out:fade>
-          { counterPChange.text }
+          { $changeCounters.PlantP.text }
         </div>
         {/if}
       </div>
@@ -95,9 +67,9 @@ const incP = () => {
         <div class="counter-label">
           <span>Plants</span>
         </div>
-        {#if counterSChange.text !== ''}
+        {#if $changeCounters.PlantS.text !== ''}
         <div class="counter-change" in:fly={counterChangeInAnim} out:fade>
-          { counterSChange.text }
+          { $changeCounters.PlantS.text }
         </div>
         {/if}
       </div>
