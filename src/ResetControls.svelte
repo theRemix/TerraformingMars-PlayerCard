@@ -15,7 +15,7 @@ const resetBoard = () => {
 {:else}
   <div class="modal-bg">
     <div class="modal">
-      <div class="modal-body">
+      <div class="modal-body modal-reset">
         <h1>Are you sure?</h1>
         <p>All game points will be reset to default values.</p>
       </div>
