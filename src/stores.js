@@ -5,17 +5,17 @@ const initialState = {
   TR: 20,
   Generation: 1,
   MCreditS: 0,
-  MCreditP: 1,
+  MCreditP: 0,
   SteelS: 0,
-  SteelP: 1,
+  SteelP: 0,
   TitaniumS: 0,
-  TitaniumP: 1,
+  TitaniumP: 0,
   PlantS: 0,
-  PlantP: 1,
+  PlantP: 0,
   EnergyS: 0,
-  EnergyP: 1,
+  EnergyP: 0,
   HeatS: 0,
-  HeatP: 1,
+  HeatP: 0,
   spendCredits: false
 }
 export const state = writable({})
