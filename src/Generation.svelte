@@ -73,7 +73,7 @@ const hideConfirm = () => productionConfirmVisible = false
 {:else}
   <div class="modal-bg">
     <div class="modal">
-      <div class="modal-body">
+      <div class="modal-body modal-generation">
         <h1>Advance Generation<br />{$state.Generation} → {$state.Generation + 1}</h1>
         <p>Produce income and resources based on TR?</p>
       </div>

@@ -975,16 +975,33 @@ p.placeholder-text {
 .modal-body {
   padding: 20px;
 }
+
 .modal-body h1 {
   text-align: center;
   display: block;
   font-size: 1.5rem;
-  font-weight: normal;
+  font-weight: bold;
+}
+
+.modal-generation.modal-body h1{
+  color: #749838;
+}
+
+.modal-reset.modal-body h1{
   color: #c24621;
 }
+
 .modal-body p {
   text-align: center;
-  color: #c24621;
+  color: #313739;
+}
+
+.modal-generation.modal-body p{
+  /* color: #749838; */
+}
+
+.modal-reset.modal-body p{
+  /* color: #c24621; */
 }
 
 .modal-buttons {
