@@ -1,5 +1,5 @@
 <script>
-import { state, spendCredits, creditRegister, creditRegisterTotal, resetConfirmVisible } from './stores'
+import { state, creditRegister, creditRegisterTotal, resetConfirmVisible } from './stores'
 import HistoryControls from './HistoryControls.svelte'
 import ResetControls from './ResetControls.svelte'
 import TerraformRank from './TerraformRank.svelte'
@@ -25,7 +25,7 @@ const itemQuantityConvertedFormat = ({ type, amount }) => {
   }
 }
 
-const enableSpendCredits = () => spendCredits.set(true)
+const enableSpendCredits = () => state.set({ ...$state, spendCredits: true })
 const disableSpendCredits = () => { // undo all transactions in register
   $creditRegister.forEach(({ type, amount }) =>
     state.set({
@@ -34,18 +34,18 @@ const disableSpendCredits = () => { // undo all transactions in register
     })
   )
   creditRegister.set([])
-  spendCredits.set(false)
+  state.set({ ...$state, spendCredits: false })
 }
 const commitSpendCredits = () => { // empty creditRegister
   creditRegister.set([])
-  spendCredits.set(false)
+  state.set({ ...$state, spendCredits: false })
 }
 
 </script>
 
 <TerraformRank />
 
-{#if !$spendCredits}
+{#if !$state.spendCredits}
   <div class="normal-mode">
     <div class="switch-mode-button">
       <button class="button-switch" on:click={ enableSpendCredits }>Enter Buy Mode</button>
@@ -55,26 +55,26 @@ const commitSpendCredits = () => { // empty creditRegister
       <HistoryControls />
     {/if}
   </div>
-  
+
   <div class="action-buttons">
     <ResetControls />
     <Generation />
   </div>
 {/if}
 
-{#if $spendCredits}
+{#if $state.spendCredits}
 <div class="spend-mode">
   <div class="exit-spend-mode-button">
     <button class="button-exit" on:click={ disableSpendCredits }>Cancel</button>
   </div>
 
-  {#if $spendCredits && !$creditRegister.length}
+  {#if $state.spendCredits && !$creditRegister.length}
     <p class="placeholder-text">Use the counters to plan your move, then click Buy to initate all actions.</p>
   {/if}
 
 
   <div class="grid-summary-container">
-    {#if $spendCredits && $creditRegister.length}
+    {#if $state.spendCredits && $creditRegister.length}
       <div class="grid-mega-credits-total">
         <div class="grid-table-resource">
           <div class="grid-table-quantity">
@@ -110,11 +110,11 @@ const commitSpendCredits = () => { // empty creditRegister
         {/each}
       </ul>
 
-    </div>  
+    </div>
   </div>
 
   <div class="grid-actions">
-    {#if $spendCredits && $creditRegister.length}
+    {#if $state.spendCredits && $creditRegister.length}
       <button class="button-buy" on:click={ commitSpendCredits }>Buy</button>
     {/if}
   </div>

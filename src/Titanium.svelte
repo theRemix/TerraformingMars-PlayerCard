@@ -1,25 +1,25 @@
 <script>
 import { fly, fade } from 'svelte/transition'
-import { state, changeCounters, spendCredits, creditRegister, queueSpend } from './stores'
+import { state, changeCounters, creditRegister, queueSpend } from './stores'
 import { counterChangeInAnim } from './utils'
 
 const dec5 = () =>
-  queueSpend($spendCredits, $creditRegister, 'TitaniumS', $state, (n => n - 5))
+  queueSpend($creditRegister, 'TitaniumS', $state, (n => n - 5))
 
 const dec1 = () =>
-  queueSpend($spendCredits, $creditRegister, 'TitaniumS', $state, (n => n - 1))
+  queueSpend($creditRegister, 'TitaniumS', $state, (n => n - 1))
 
 const inc1 = () =>
-  queueSpend($spendCredits, $creditRegister, 'TitaniumS', $state, (n => n + 1))
+  queueSpend($creditRegister, 'TitaniumS', $state, (n => n + 1))
 
 const inc5 = () =>
-  queueSpend($spendCredits, $creditRegister, 'TitaniumS', $state, (n => n + 5))
+  queueSpend($creditRegister, 'TitaniumS', $state, (n => n + 5))
 
 const decP = () =>
-  queueSpend($spendCredits, $creditRegister, 'TitaniumP', $state, (n => n - 1))
+  queueSpend($creditRegister, 'TitaniumP', $state, (n => n - 1))
 
 const incP = () =>
-  queueSpend($spendCredits, $creditRegister, 'TitaniumP', $state, (n => n + 1))
+  queueSpend($creditRegister, 'TitaniumP', $state, (n => n + 1))
 
 </script>
 

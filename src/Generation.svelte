@@ -1,5 +1,5 @@
 <script>
-import { state, changeCounters, creditRegister, spendCredits } from './stores'
+import { state, changeCounters, creditRegister } from './stores'
 import { updateCounterChange } from './utils'
 
 const productionPhase = () => {
@@ -62,7 +62,7 @@ const hideConfirm = () => productionConfirmVisible = false
 
 
 {#if !productionConfirmVisible}
-  <button class="button-generation" disabled={$spendCredits} on:click={ showConfirm }>
+  <button class="button-generation" disabled={$state.spendCredits} on:click={ showConfirm }>
     <div class="generation-text">
       { $state.Generation }
       <span></span>

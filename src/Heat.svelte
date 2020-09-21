@@ -1,22 +1,22 @@
 <script>
 import { fly, fade } from 'svelte/transition'
-import { state, changeCounters, spendCredits, creditRegister, queueSpend } from './stores'
+import { state, changeCounters, creditRegister, queueSpend } from './stores'
 import { counterChangeInAnim } from './utils'
 
 const dec8 = () =>
-  queueSpend($spendCredits, $creditRegister, 'HeatS', $state, (n => n - 8))
+  queueSpend($creditRegister, 'HeatS', $state, (n => n - 8))
 
 const dec1 = () =>
-  queueSpend($spendCredits, $creditRegister, 'HeatS', $state, (n => n - 1))
+  queueSpend($creditRegister, 'HeatS', $state, (n => n - 1))
 
 const inc1 = () =>
-  queueSpend($spendCredits, $creditRegister, 'HeatS', $state, (n => n + 1))
+  queueSpend($creditRegister, 'HeatS', $state, (n => n + 1))
 
 const decP = () =>
-  queueSpend($spendCredits, $creditRegister, 'HeatP', $state, (n => n - 1))
+  queueSpend($creditRegister, 'HeatP', $state, (n => n - 1))
 
 const incP = () =>
-  queueSpend($spendCredits, $creditRegister, 'HeatP', $state, (n => n + 1))
+  queueSpend($creditRegister, 'HeatP', $state, (n => n + 1))
 
 </script>
 

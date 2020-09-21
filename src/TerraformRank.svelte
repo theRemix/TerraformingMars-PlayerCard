@@ -1,12 +1,12 @@
 <script>
 import { fly, fade } from 'svelte/transition'
-import { state, spendCredits, creditRegister, queueSpend } from './stores'
+import { state, creditRegister, queueSpend } from './stores'
 import { createChangeCounter, updateCounterChange, counterChangeInAnim } from './utils'
 
 let counterChange = createChangeCounter('TR')
 
 const dec1 = () => {
-  queueSpend($spendCredits, $creditRegister, 'TR', $state, (n => n - 1))
+  queueSpend($creditRegister, 'TR', $state, (n => n - 1))
   counterChange = updateCounterChange(
     counterChange,
     (n => n - 1),
@@ -14,7 +14,7 @@ const dec1 = () => {
   )
 }
 const inc1 = () => {
-  queueSpend($spendCredits, $creditRegister, 'TR', $state, (n => n + 1))
+  queueSpend($creditRegister, 'TR', $state, (n => n + 1))
   counterChange = updateCounterChange(
     counterChange,
     (n => n + 1),

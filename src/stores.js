@@ -16,6 +16,7 @@ const initialState = {
   EnergyP: 1,
   HeatS: 0,
   HeatP: 1,
+  spendCredits: false
 }
 export const state = writable({})
 export const resetState = () => state.set(initialState)
@@ -46,7 +47,6 @@ if (Storage && localStorage.getItem('state')) {
 
 export const logs = writable([])
 
-export const spendCredits = writable(false)
 export const creditRegister = writable([]) // [{ type, amount }]
 
 export const creditRegisterTotal = derived(
@@ -72,24 +72,29 @@ export const history = writable([]) // [{ committed, state }]
 
 state.subscribe($state => {
 
-  // ## HISTORY ##
-  history.update($history => {
-    const stepIdx = $history
-      .map(({committed}) => committed)
-      .lastIndexOf(true) // last committed item
+  console.log({ $state })
 
-    const history = stepIdx >= 0 ?
-      $history.slice(stepIdx) : // discard any committed undos
-      $history
+  if (!$state.spendCredits){
 
-    return [
-      {
-        committed: false,
-        state: $state
-      },
-      ...history.map(item => ({ ...item, committed: false })) // reset
-    ]
-  })
+    // ## HISTORY ##
+    history.update($history => {
+      const stepIdx = $history
+        .map(({committed}) => committed)
+        .lastIndexOf(true) // last committed item
+
+      const history = stepIdx >= 0 ?
+        $history.slice(stepIdx) : // discard any committed undos
+        $history
+
+      return [
+        {
+          committed: false,
+          state: $state
+        },
+        ...history.map(item => ({ ...item, committed: false })) // reset
+      ]
+    })
+  }
 
   // ## SESSIONS ##
   if (Storage) {
@@ -99,8 +104,8 @@ state.subscribe($state => {
 })
 
 // creditRegister: [{type, amount}]
-export const queueSpend = (spendCredits, creditRegister$, counterType, state$, counterFn) => {
-  if(spendCredits){ // queue for commit
+export const queueSpend = (creditRegister$, counterType, state$, counterFn) => {
+  if(state$.spendCredits){ // queue for commit
     // look for existing entry by type
     const reg = creditRegister$.find(({type}) => type === counterType)
     if(reg){
